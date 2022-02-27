@@ -1,6 +1,6 @@
 export interface Pagination<T> {
     info: Info
-    result: T[]
+    results: T[]
 }
 
 export interface Info {

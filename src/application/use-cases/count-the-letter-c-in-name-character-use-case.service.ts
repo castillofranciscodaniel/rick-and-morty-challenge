@@ -2,17 +2,19 @@ import {Injectable} from '@nestjs/common';
 import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
 import {catchError, mergeMap, Observable, of, throwError, zip} from "rxjs";
 import {CountResult} from "../dto/count-result";
+import {Character} from "../../domain/models/character";
+import {Pagination} from "../../infraestructure/dto/pagination";
 
 @Injectable()
 export class CountTheLetterCInNameCharacterUseCaseService {
 
-    letter: 'c'
-    resource: 'resource'
+    private letter = 'c'
+    private resource = 'resource'
 
     constructor(private readonly characterClient: CharacterClientService) {
     }
 
-    handler(): Observable<CountResult> {
+    async handler(): Promise<CountResult> {
 
         const countResult: CountResult = {
             count: 0,
@@ -20,28 +22,27 @@ export class CountTheLetterCInNameCharacterUseCaseService {
             resource: this.resource,
         }
 
-        const requests: Observable<any>[] = [];
+
+        const requests: Promise<Pagination<Character>>[] = [];
         for (let i = 0; i <= 42; i++) {
             requests.push(this.characterClient.findAll(i))
         }
 
-        return zip(...requests).pipe(
-            mergeMap(characters => {
+        const resultAll = Promise.all(requests)
 
-                characters.flatMap((character) => {
+        await resultAll.then(thenResults => {
+            thenResults.map(pag => {
+                pag.results.map((character) => {
                     for (let i = 0; i < character.name?.length; i++) {
                         if (character.name.toLowerCase().charAt(i) === this.letter) {
                             countResult.count++
                         }
                     }
                 })
-
-                return of(countResult)
-            }),
-            catchError(error => {
-                return throwError(error);
             })
-        )
+        })
+
+        return countResult
     }
 
 }

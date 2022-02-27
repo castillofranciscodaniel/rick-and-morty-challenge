@@ -13,20 +13,13 @@ export class CharacterClientService {
     constructor(private readonly http: HttpService) {
     }
 
-    async findAll(page): Promise<Character[]> {
+    async findAll(page): Promise<Pagination<Character>> {
 
         const params = {
             page: page
         }
 
-        const result = await this.http.get<Pagination<Character[]>>(this.endpoint, {params});
-
-        new Promise(((resolve, reject) => {
-            resolve(result.data.result[0])
-        })
-
-        return new Promise(((resolve, reject) => {
-            resolve(result.data.result[0])
-        }))
+        const result = await this.http.get<Pagination<Character>>(this.endpoint, {params})
+        return result.data
     }
 }
