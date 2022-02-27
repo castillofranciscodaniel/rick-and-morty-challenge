@@ -14,7 +14,8 @@ import {EpisodeClientService} from './episode-client.service';
             }),
         }),
     ],
-    providers: [CharacterClientService, LocationClientService, EpisodeClientService]
+    providers: [CharacterClientService, LocationClientService, EpisodeClientService],
+    exports: [CharacterClientService, LocationClientService, EpisodeClientService]
 })
 export class ClientsModule {
 }
