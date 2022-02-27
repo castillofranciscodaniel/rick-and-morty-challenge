@@ -3,6 +3,7 @@ import {HttpModule} from "@nestjs/axios";
 import {CharacterClientService} from './character-client.service';
 import {LocationClientService} from './location-client.service';
 import {EpisodeClientService} from './episode-client.service';
+import {CustomHttpService} from "./custom.http.service";
 
 @Module({
     imports: [
@@ -14,7 +15,7 @@ import {EpisodeClientService} from './episode-client.service';
             }),
         }),
     ],
-    providers: [CharacterClientService, LocationClientService, EpisodeClientService]
+    providers: [CustomHttpService, CharacterClientService, LocationClientService, EpisodeClientService]
 })
 export class ClientsModule {
 }
