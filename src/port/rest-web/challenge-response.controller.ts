@@ -12,6 +12,7 @@ import {
 import {
     CountTheLetterEInNamesEpisodeUseCaseService
 } from "../../application/use-cases/count-the-letter-e-in-names-episode-use-case.service";
+import {CounterExerciseUseCaseService} from "../../application/use-cases/counter-exercise-use-case.service";
 
 @Controller({
     path: "/",
@@ -23,35 +24,20 @@ export class ChallengeResponseController {
     private maxTimeToExecuteInSeconds = 3
 
     constructor(
-        private readonly countTheLetterCInNameCharacterUseCaseService: CountTheLetterCInNameCharacterUseCaseService,
-        private readonly countTheLetterIInNamesLocationUseCaseService: CountTheLetterIInNamesLocationUseCaseService,
-        private readonly countTheLetterEInNamesEpisodeUseCaseService: CountTheLetterEInNamesEpisodeUseCaseService
+        private readonly counterExerciseUseCaseService: CounterExerciseUseCaseService
     ) {
     }
 
     @Get('/challengeResult')
-    async handleNextChatSchedule(): Promise<any> {
+     handler(): Promise<any> {
         const startTime = new Date().getTime();
 
-        const resultAll = await Promise.all(
+        return  Promise.all(
             [
-                this.countTheLetterCInNameCharacterUseCaseService.handler(),
-                this.countTheLetterIInNamesLocationUseCaseService.handler(),
-                this.countTheLetterEInNamesEpisodeUseCaseService.handler()
+                this.counterExerciseUseCaseService.handler(),
             ]
         )
 
-        const endTime = new Date().getTime();
-        const totalTimeMilliseconds = (endTime - startTime)
-        const seconds = Math.trunc(totalTimeMilliseconds / 1000)
-        const rest = totalTimeMilliseconds % 1000
-
-        return {
-            exercise_name: this.exercise_name,
-            time: `${seconds}s ${rest}`,
-            in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInSeconds,
-            results: resultAll
-        }
     }
 
 }
