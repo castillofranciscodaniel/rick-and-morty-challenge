@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import {HttpModule} from "@nestjs/axios";
+import { CharacterClientService } from './character-client.service';
 
 @Module({
     imports: [
@@ -10,6 +11,7 @@ import {HttpModule} from "@nestjs/axios";
                 maxContentLength: Infinity,
             }),
         }),
-    ]
+    ],
+    providers: [CharacterClientService]
 })
 export class ClientsModule {}

@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ClientsModule } from './src/client/clients/clients.module';
-import { ClientsModule } from './client/clients/clients.module';
-import { ClientsModule } from './src/client/clients/clients.module';
+import {ClientsModule} from "./clients/clients.module";
 
 @Module({
   imports: [ClientsModule],
