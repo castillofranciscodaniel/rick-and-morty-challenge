@@ -5,7 +5,7 @@ import {HttpService} from "@nestjs/axios";
 
 export abstract class CustomHttpService<T> {
 
-    protected constructor(private readonly http: HttpService) {
+    constructor(readonly http: HttpService) {
     }
 
     public post<T>(url: string, data?: any, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
