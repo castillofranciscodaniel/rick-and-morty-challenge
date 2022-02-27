@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {CountResult} from "../dto/count-result";
 import {Pagination} from "../../infraestructure/dto/pagination";
 import {EpisodeClientService} from "../../infraestructure/clients/episode-client.service";
-import {Location} from "../../domain/models/location";
 import {Episode} from "../../domain/models/episode";
 
 @Injectable()

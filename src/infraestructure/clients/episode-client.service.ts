@@ -1,7 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
 import {Pagination} from "../dto/pagination";
-import {Character} from "../../domain/models/character";
 import {Episode} from "../../domain/models/episode";
 
 @Injectable()
