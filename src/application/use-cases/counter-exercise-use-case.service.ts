@@ -3,6 +3,7 @@ import {CharacterClientService} from "../../infraestructure/clients/character-cl
 import {CountTheLetterCInNameCharacterUseCaseService} from "./count-the-letter-c-in-name-character-use-case.service";
 import {CountTheLetterIInNamesLocationUseCaseService} from "./count-the-letter-i-in-names-location-use-case.service";
 import {CountTheLetterEInNamesEpisodeUseCaseService} from "./count-the-letter-e-in-names-episode-use-case.service";
+import {CountResult, ExerciseResult} from "../dto/count-result";
 
 @Injectable()
 export class CounterExerciseUseCaseService {
@@ -17,7 +18,7 @@ export class CounterExerciseUseCaseService {
     ) {
     }
 
-    async handler(): Promise<any> {
+    async handler(): Promise<ExerciseResult<CountResult>> {
         const startTime = new Date().getTime();
 
         const resultAll = await Promise.all(
@@ -38,7 +39,7 @@ export class CounterExerciseUseCaseService {
             time: `${seconds}s ${rest}`,
             in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInSeconds,
             results: resultAll
-        }
+        } as ExerciseResult<CountResult>
     }
 
 }

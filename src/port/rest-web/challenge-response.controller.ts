@@ -3,7 +3,7 @@ import {catchError, map, Observable, throwError} from "rxjs";
 import {
     CountTheLetterCInNameCharacterUseCaseService
 } from "../../application/use-cases/count-the-letter-c-in-name-character-use-case.service";
-import {CountResult} from "../../application/dto/count-result";
+import {CountResult, ExerciseResult} from "../../application/dto/count-result";
 import {Character} from "../../domain/models/character";
 import {Pagination} from "../../infraestructure/dto/pagination";
 import {
@@ -32,7 +32,7 @@ export class ChallengeResponseController {
      handler(): Promise<any> {
         const startTime = new Date().getTime();
 
-        return  Promise.all(
+        return  Promise.all<ExerciseResult<CountResult>>(
             [
                 this.counterExerciseUseCaseService.handler(),
             ]
