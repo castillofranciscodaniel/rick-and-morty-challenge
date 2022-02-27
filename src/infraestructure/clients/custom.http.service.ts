@@ -3,28 +3,28 @@ import {AxiosRequestConfig, AxiosResponse} from 'axios';
 import {HttpService} from "@nestjs/axios";
 
 
-export abstract class CustomHttpService {
+export abstract class CustomHttpService<T> {
 
     protected constructor(private readonly http: HttpService) {
     }
 
-    public post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+    public post<T>(url: string, data?: any, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         return this.http.post(url, data, config);
     }
 
-    public get<T = any>(url: string, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+    public get<T>(url: string, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         return this.http.get(url, config);
     }
 
-    public put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+    public put<T>(url: string, data?: any, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         return this.http.put(url, data, config);
     }
 
-    public delete<T = any>(url: string, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+    public delete<T>(url: string, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         return this.http.delete(url, config);
     }
 
-    public request<T = any>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+    public request<T>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         return this.http.request(config);
     }
 
