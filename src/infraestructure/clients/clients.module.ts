@@ -15,7 +15,7 @@ import {CustomHttpService} from "./custom.http.service";
             }),
         }),
     ],
-    providers: [CustomHttpService, CharacterClientService, LocationClientService, EpisodeClientService]
+    providers: [CharacterClientService, LocationClientService, EpisodeClientService]
 })
 export class ClientsModule {
 }

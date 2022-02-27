@@ -1,14 +1,11 @@
-import {Injectable} from '@nestjs/common';
 import {Observable} from 'rxjs';
 import {AxiosRequestConfig, AxiosResponse} from 'axios';
 import {HttpService} from "@nestjs/axios";
 
 
-@Injectable()
-export class CustomHttpService {
+export abstract class CustomHttpService {
 
-
-    constructor(private readonly http: HttpService) {
+    protected constructor(private readonly http: HttpService) {
     }
 
     public post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
@@ -30,7 +27,6 @@ export class CustomHttpService {
     public request<T = any>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         return this.http.request(config);
     }
-
 
 }
 
