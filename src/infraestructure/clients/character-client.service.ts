@@ -22,7 +22,7 @@ export class CharacterClientService {
         };
 
         return this.http.get(this.endpoint, axiosRequest).pipe(
-            map(value => value.data.result),
+            map(value => value.data.results),
             catchError(error => {
                 return throwError(error);
             })
