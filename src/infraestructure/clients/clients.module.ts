@@ -1,8 +1,8 @@
 import {Module} from '@nestjs/common';
-import {HttpModule} from "@nestjs/axios";
 import {CharacterClientService} from './character-client.service';
 import {LocationClientService} from './location-client.service';
 import {EpisodeClientService} from './episode-client.service';
+import {HttpModule} from "nestjs-http-promise";
 
 @Module({
     imports: [
