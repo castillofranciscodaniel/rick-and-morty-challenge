@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
+import {Module} from '@nestjs/common';
 import {HttpModule} from "@nestjs/axios";
-import { CharacterClientService } from './character-client.service';
+import {CharacterClientService} from './character-client.service';
+import {LocationClientService} from './location-client.service';
+import {EpisodeClientService} from './episode-client.service';
 
 @Module({
     imports: [
@@ -12,6 +14,7 @@ import { CharacterClientService } from './character-client.service';
             }),
         }),
     ],
-    providers: [CharacterClientService]
+    providers: [CharacterClientService, LocationClientService, EpisodeClientService]
 })
-export class ClientsModule {}
+export class ClientsModule {
+}
