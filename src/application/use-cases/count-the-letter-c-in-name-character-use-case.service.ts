@@ -9,7 +9,7 @@ import {Pagination} from "../../infraestructure/dto/pagination";
 export class CountTheLetterCInNameCharacterUseCaseService {
 
     private letter = 'c'
-    private resource = 'resource'
+    private resource = 'character'
 
     constructor(private readonly characterClient: CharacterClientService) {
     }
@@ -22,27 +22,31 @@ export class CountTheLetterCInNameCharacterUseCaseService {
             resource: this.resource,
         }
 
-
         const requests: Promise<Pagination<Character>>[] = [];
-        for (let i = 0; i <= 42; i++) {
+        const firstPage = await this.characterClient.findAll(1)
+        this.countResultProcess(countResult, firstPage)
+
+        for (let i = 1; i <= firstPage.info.pages; i++) {
             requests.push(this.characterClient.findAll(i))
         }
 
-        const resultAll = Promise.all(requests)
-
-        await resultAll.then(thenResults => {
+        await Promise.all(requests).then(thenResults => {
             thenResults.map(pag => {
-                pag.results.map((character) => {
-                    for (let i = 0; i < character.name?.length; i++) {
-                        if (character.name.toLowerCase().charAt(i) === this.letter) {
-                            countResult.count++
-                        }
-                    }
-                })
+                this.countResultProcess(countResult, pag)
             })
         })
 
         return countResult
+    }
+
+    private countResultProcess(countResult: CountResult, pagination: Pagination<Character>): void {
+        pagination.results.map((character) => {
+            for (let i = 0; i < character.name?.length; i++) {
+                if (character.name.toLowerCase().charAt(i) === this.letter) {
+                    countResult.count++
+                }
+            }
+        })
     }
 
 }

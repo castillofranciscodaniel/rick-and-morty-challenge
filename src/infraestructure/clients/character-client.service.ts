@@ -1,9 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {Character} from "../../domain/models/character";
-import {catchError, map, Observable, throwError} from "rxjs";
 import {Pagination} from "../dto/pagination";
 import {HttpService} from "nestjs-http-promise";
-import {AxiosRequestConfig, AxiosResponse} from "axios";
 
 @Injectable()
 export class CharacterClientService {
