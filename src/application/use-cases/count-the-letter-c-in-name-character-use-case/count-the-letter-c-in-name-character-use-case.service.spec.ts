@@ -22,10 +22,6 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
         service = module.get<CountTheLetterCInNameCharacterUseCaseService>(CountTheLetterCInNameCharacterUseCaseService);
     });
 
-    it('should be defined', () => {
-        expect(service).toBeDefined();
-    });
-
     it('should be return an CountResult', async () => {
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
