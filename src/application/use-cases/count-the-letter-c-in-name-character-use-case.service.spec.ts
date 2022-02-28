@@ -27,7 +27,6 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
     });
 
     it('should be return an CountResult', async () => {
-        jest.setTimeout(30000);
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
                 return Promise.resolve(newCharacterPage1())
