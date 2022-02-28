@@ -7,9 +7,9 @@ import {Location} from "../../domain/models/location";
 import {LocationClientService} from "../../infraestructure/clients/location-client.service";
 
 @Injectable()
-export class CountTheLetterIInNamesLocationUseCaseService {
+export class CountTheLetterLInNamesLocationUseCaseService {
 
-    private letter = 'c'
+    private letter = 'l'
     private resource = 'location'
 
     constructor(private readonly locationClientService: LocationClientService) {
@@ -42,7 +42,7 @@ export class CountTheLetterIInNamesLocationUseCaseService {
 
     private countResultProcess(countResult: CountResult, pagination: Pagination<Location>): void {
         pagination.results.map((character) => {
-            for (let i = 0; i < character.name?.length; i++) {
+            for (let i = 0; i < character.name.length; i++) {
                 if (character.name.toLowerCase().charAt(i) === this.letter) {
                     countResult.count++
                 }

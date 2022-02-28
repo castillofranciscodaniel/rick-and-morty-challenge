@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
 import {CountTheLetterCInNameCharacterUseCaseService} from "./count-the-letter-c-in-name-character-use-case.service";
-import {CountTheLetterIInNamesLocationUseCaseService} from "./count-the-letter-i-in-names-location-use-case.service";
+import {CountTheLetterLInNamesLocationUseCaseService} from "./count-the-letter-l-in-names-location-use-case.service";
 import {CountTheLetterEInNamesEpisodeUseCaseService} from "./count-the-letter-e-in-names-episode-use-case.service";
 import {CountResult, ExerciseResult} from "../dto/count-result";
 
@@ -13,7 +13,7 @@ export class CounterExerciseUseCaseService {
 
     constructor(
         private readonly countTheLetterCInNameCharacterUseCaseService: CountTheLetterCInNameCharacterUseCaseService,
-        private readonly countTheLetterIInNamesLocationUseCaseService: CountTheLetterIInNamesLocationUseCaseService,
+        private readonly countTheLetterIInNamesLocationUseCaseService: CountTheLetterLInNamesLocationUseCaseService,
         private readonly countTheLetterEInNamesEpisodeUseCaseService: CountTheLetterEInNamesEpisodeUseCaseService
     ) {
     }
@@ -36,7 +36,7 @@ export class CounterExerciseUseCaseService {
 
         return {
             exercise_name: this.exercise_name,
-            time: `${seconds}s ${rest}`,
+            time: `${seconds}s ${rest}ms`,
             in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInSeconds,
             results: resultAll
         } as ExerciseResult<CountResult>

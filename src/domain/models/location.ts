@@ -5,5 +5,5 @@ export class Location {
     dimension: string;
     residents: string[];
     url: string;
-    created: Date;
+    created: string;
 }

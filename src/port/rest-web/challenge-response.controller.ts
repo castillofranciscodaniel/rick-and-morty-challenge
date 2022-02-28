@@ -7,8 +7,8 @@ import {CountResult, ExerciseResult} from "../../application/dto/count-result";
 import {Character} from "../../domain/models/character";
 import {Pagination} from "../../infraestructure/dto/pagination";
 import {
-    CountTheLetterIInNamesLocationUseCaseService
-} from "../../application/use-cases/count-the-letter-i-in-names-location-use-case.service";
+    CountTheLetterLInNamesLocationUseCaseService
+} from "../../application/use-cases/count-the-letter-l-in-names-location-use-case.service";
 import {
     CountTheLetterEInNamesEpisodeUseCaseService
 } from "../../application/use-cases/count-the-letter-e-in-names-episode-use-case.service";
