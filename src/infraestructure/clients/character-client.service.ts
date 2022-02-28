@@ -11,7 +11,7 @@ export class CharacterClientService {
     constructor(private readonly http: HttpService) {
     }
 
-    async findAll(page): Promise<Pagination<Character>> {
+    async findAll(page: number): Promise<Pagination<Character>> {
 
         const params = {
             page: page

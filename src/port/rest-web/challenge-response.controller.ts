@@ -20,9 +20,6 @@ import {CounterExerciseUseCaseService} from "../../application/use-cases/counter
 })
 export class ChallengeResponseController {
 
-    private exercise_name = 'Char counter'
-    private maxTimeToExecuteInSeconds = 3
-
     constructor(
         private readonly counterExerciseUseCaseService: CounterExerciseUseCaseService
     ) {
