@@ -2,7 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {CounterExerciseUseCaseService} from './counter-exercise-use-case.service';
 import {CountTheLetterEInNamesEpisodeUseCaseService} from "./count-the-letter-e-in-names-episode-use-case.service";
 import {CountTheLetterCInNameCharacterUseCaseService} from "./count-the-letter-c-in-name-character-use-case.service";
-import {CountResult, ExerciseResult} from "../dto/count-result";
+import {CountResult} from "../dto/count-result";
 import {CountTheLetterLInNamesLocationUseCaseService} from "./count-the-letter-l-in-names-location-use-case.service";
 import {UseCasesModule} from "./use-cases.module";
 
@@ -28,7 +28,7 @@ describe('CounterExerciseUseCaseService', () => {
         expect(service).toBeDefined();
     });
 
-    it('should be return an CountResult', async () => {
+    it('should be return an ExerciseResult', async () => {
 
         jest.spyOn(countTheLetterCInNameCharacterUseCaseService, 'handler').mockImplementation(() => {
             return Promise.resolve(newPageResultC());

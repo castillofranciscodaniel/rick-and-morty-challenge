@@ -6,7 +6,7 @@ export interface CountResult {
 
 export interface ExerciseResult<T> {
     exercise_name: string,
-    time: string,
+    time?: string,
     in_time: true,
     results: T[]
 }
