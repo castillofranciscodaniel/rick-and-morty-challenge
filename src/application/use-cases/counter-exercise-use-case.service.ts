@@ -9,7 +9,7 @@ import {CountResult, ExerciseResult} from "../dto/count-result";
 export class CounterExerciseUseCaseService {
 
     private exercise_name = 'Char counter'
-    private maxTimeToExecuteInSeconds = 3
+    private maxTimeToExecuteInMilliseconds = 3000
 
     constructor(
         private readonly countTheLetterCInNameCharacterUseCaseService: CountTheLetterCInNameCharacterUseCaseService,
@@ -37,7 +37,7 @@ export class CounterExerciseUseCaseService {
         return {
             exercise_name: this.exercise_name,
             time: `${seconds}s ${rest}ms`,
-            in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInSeconds,
+            in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInMilliseconds,
             results: resultAll
         } as ExerciseResult<CountResult>
     }
