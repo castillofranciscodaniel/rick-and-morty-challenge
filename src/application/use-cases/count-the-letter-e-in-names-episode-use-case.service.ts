@@ -8,7 +8,7 @@ import {Episode} from "../../domain/models/episode";
 export class CountTheLetterEInNamesEpisodeUseCaseService {
 
     private letter = 'e'
-    private resource = 'location'
+    private resource = 'episode'
 
     constructor(private readonly episodeClientService: EpisodeClientService) {
     }
@@ -25,7 +25,7 @@ export class CountTheLetterEInNamesEpisodeUseCaseService {
         const firstPage = await this.episodeClientService.findAll(1)
         this.countResultProcess(countResult, firstPage)
 
-        for (let i = 1; i <= firstPage.info.pages; i++) {
+        for (let i = 2; i <= firstPage.info.pages; i++) {
             requests.push(this.episodeClientService.findAll(i))
         }
 
@@ -40,7 +40,7 @@ export class CountTheLetterEInNamesEpisodeUseCaseService {
 
     private countResultProcess(countResult: CountResult, pagination: Pagination<Episode>): void {
         pagination.results.map((character) => {
-            for (let i = 0; i < character.name?.length; i++) {
+            for (let i = 0; i < character.name.length; i++) {
                 if (character.name.toLowerCase().charAt(i) === this.letter) {
                     countResult.count++
                 }

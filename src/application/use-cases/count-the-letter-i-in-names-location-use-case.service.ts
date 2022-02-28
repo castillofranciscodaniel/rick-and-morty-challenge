@@ -27,7 +27,7 @@ export class CountTheLetterIInNamesLocationUseCaseService {
         const firstPage = await this.locationClientService.findAll(1)
         this.countResultProcess(countResult, firstPage)
 
-        for (let i = 1; i <= firstPage.info.pages; i++) {
+        for (let i = 1; i < firstPage.info.pages; i++) {
             requests.push(this.locationClientService.findAll(i))
         }
 
