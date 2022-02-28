@@ -1,10 +1,10 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterEInNamesEpisodeUseCaseService} from './count-the-letter-e-in-names-episode-use-case.service';
-import {CountResult} from "../dto/count-result";
-import {ClientsModule} from "../../infraestructure/clients/clients.module";
-import {EpisodeClientService} from "../../infraestructure/clients/episode-client.service";
-import {Pagination} from "../../infraestructure/dto/pagination";
-import {Episode} from "../../domain/models/episode";
+import {CountResult} from "../../dto/count-result";
+import {ClientsModule} from "../../../infraestructure/clients/clients.module";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
+import {Pagination} from "../../../infraestructure/dto/pagination";
+import {Episode} from "../../../domain/models/episode";
 
 describe('CountTheLetterEInNamesEpisodeUseCaseService', () => {
     let service: CountTheLetterEInNamesEpisodeUseCaseService;

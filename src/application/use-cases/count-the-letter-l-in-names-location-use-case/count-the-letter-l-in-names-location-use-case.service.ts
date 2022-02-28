@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
-import {CountResult} from "../dto/count-result";
-import {Pagination} from "../../infraestructure/dto/pagination";
-import {Character} from "../../domain/models/character";
-import {Location} from "../../domain/models/location";
-import {LocationClientService} from "../../infraestructure/clients/location-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {CountResult} from "../../dto/count-result";
+import {Pagination} from "../../../infraestructure/dto/pagination";
+import {Character} from "../../../domain/models/character";
+import {Location} from "../../../domain/models/location";
+import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
 
 @Injectable()
 export class CountTheLetterLInNamesLocationUseCaseService {

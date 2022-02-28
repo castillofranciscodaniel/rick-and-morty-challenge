@@ -1,11 +1,11 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterLInNamesLocationUseCaseService} from './count-the-letter-l-in-names-location-use-case.service';
-import {CountResult} from "../dto/count-result";
-import {LocationClientService} from "../../infraestructure/clients/location-client.service";
-import {Pagination} from "../../infraestructure/dto/pagination";
-import {Episode} from "../../domain/models/episode";
-import {Location} from "../../domain/models/location";
-import {ClientsModule} from "../../infraestructure/clients/clients.module";
+import {CountResult} from "../../dto/count-result";
+import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
+import {Pagination} from "../../../infraestructure/dto/pagination";
+import {Episode} from "../../../domain/models/episode";
+import {Location} from "../../../domain/models/location";
+import {ClientsModule} from "../../../infraestructure/clients/clients.module";
 
 describe('CountTheLetterLInNamesLocationUseCaseService', () => {
     let service: CountTheLetterLInNamesLocationUseCaseService;

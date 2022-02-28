@@ -1,8 +1,8 @@
 import {Injectable} from '@nestjs/common';
-import {CountResult} from "../dto/count-result";
-import {Pagination} from "../../infraestructure/dto/pagination";
-import {EpisodeClientService} from "../../infraestructure/clients/episode-client.service";
-import {Episode} from "../../domain/models/episode";
+import {CountResult} from "../../dto/count-result";
+import {Pagination} from "../../../infraestructure/dto/pagination";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
+import {Episode} from "../../../domain/models/episode";
 
 @Injectable()
 export class CountTheLetterEInNamesEpisodeUseCaseService {

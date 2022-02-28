@@ -1,9 +1,9 @@
 import {Injectable} from '@nestjs/common';
-import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
-import {CountTheLetterCInNameCharacterUseCaseService} from "./count-the-letter-c-in-name-character-use-case.service";
-import {CountTheLetterLInNamesLocationUseCaseService} from "./count-the-letter-l-in-names-location-use-case.service";
-import {CountTheLetterEInNamesEpisodeUseCaseService} from "./count-the-letter-e-in-names-episode-use-case.service";
-import {CountResult, ExerciseResult} from "../dto/count-result";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {CountTheLetterCInNameCharacterUseCaseService} from "../count-the-letter-c-in-name-character-use-case/count-the-letter-c-in-name-character-use-case.service";
+import {CountTheLetterLInNamesLocationUseCaseService} from "../count-the-letter-l-in-names-location-use-case/count-the-letter-l-in-names-location-use-case.service";
+import {CountTheLetterEInNamesEpisodeUseCaseService} from "../count-the-letter-e-in-names-episode-use-case/count-the-letter-e-in-names-episode-use-case.service";
+import {CountResult, ExerciseResult} from "../../dto/count-result";
 
 @Injectable()
 export class CounterExerciseUseCaseService {

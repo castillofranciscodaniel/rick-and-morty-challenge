@@ -1,10 +1,10 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterCInNameCharacterUseCaseService} from './count-the-letter-c-in-name-character-use-case.service';
-import {ClientsModule} from "../../infraestructure/clients/clients.module";
-import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
-import {Info, Pagination} from "../../infraestructure/dto/pagination";
-import {Character} from "../../domain/models/character";
-import {CountResult} from "../dto/count-result";
+import {ClientsModule} from "../../../infraestructure/clients/clients.module";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {Info, Pagination} from "../../../infraestructure/dto/pagination";
+import {Character} from "../../../domain/models/character";
+import {CountResult} from "../../dto/count-result";
 
 describe('CountTheLetterCInNameCharacterUseCaseService', () => {
     let service: CountTheLetterCInNameCharacterUseCaseService;
