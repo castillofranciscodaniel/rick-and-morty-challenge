@@ -26,7 +26,7 @@ export class CountTheLetterCInNameCharacterUseCaseService {
         const firstPage = await this.characterClient.findAll(1)
         this.countResultProcess(countResult, firstPage)
 
-        for (let i = 1; i < firstPage.info.pages; i++) {
+        for (let i = 2; i <= firstPage.info.pages; i++) {
             requests.push(this.characterClient.findAll(i))
         }
 
