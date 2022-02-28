@@ -5,5 +5,5 @@ export class Episode {
     episode: string;
     characters: string[];
     url: string;
-    created: Date;
+    created: string;
 }

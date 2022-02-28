@@ -2,17 +2,19 @@ import {Injectable} from '@nestjs/common';
 import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
 import {catchError, mergeMap, Observable, of, throwError, zip} from "rxjs";
 import {CountResult} from "../dto/count-result";
+import {Character} from "../../domain/models/character";
+import {Pagination} from "../../infraestructure/dto/pagination";
 
 @Injectable()
 export class CountTheLetterCInNameCharacterUseCaseService {
 
-    letter: 'c'
-    resource: 'resource'
+    private letter = 'c'
+    private resource = 'character'
 
     constructor(private readonly characterClient: CharacterClientService) {
     }
 
-    handler(): Observable<CountResult> {
+    async handler(): Promise<CountResult> {
 
         const countResult: CountResult = {
             count: 0,
@@ -20,28 +22,31 @@ export class CountTheLetterCInNameCharacterUseCaseService {
             resource: this.resource,
         }
 
-        const requests: Observable<any>[] = [];
-        for (let i = 0; i <= 42; i++) {
+        const requests: Promise<Pagination<Character>>[] = [];
+        const firstPage = await this.characterClient.findAll(1)
+        this.countResultProcess(countResult, firstPage)
+
+        for (let i = 1; i < firstPage.info.pages; i++) {
             requests.push(this.characterClient.findAll(i))
         }
 
-        return zip(...requests).pipe(
-            mergeMap(characters => {
-
-                characters.flatMap((character) => {
-                    for (let i = 0; i < character.name?.length; i++) {
-                        if (character.name.toLowerCase().charAt(i) === this.letter) {
-                            countResult.count++
-                        }
-                    }
-                })
-
-                return of(countResult)
-            }),
-            catchError(error => {
-                return throwError(error);
+        await Promise.all(requests).then(thenResults => {
+            thenResults.map(pag => {
+                this.countResultProcess(countResult, pag)
             })
-        )
+        })
+
+        return countResult
+    }
+
+    private countResultProcess(countResult: CountResult, pagination: Pagination<Character>): void {
+        pagination.results.map((character) => {
+            for (let i = 0; i < character.name.length; i++) {
+                if (character.name.toLowerCase().charAt(i) === this.letter) {
+                    countResult.count++
+                }
+            }
+        })
     }
 
 }
