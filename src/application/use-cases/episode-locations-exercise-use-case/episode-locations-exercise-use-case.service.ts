@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
-import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
-import {LOGGER, LoggerCustomService} from "../../../infraestructure/services/logger-custom.service";
+import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
+import {LOGGER, LoggerCustomService} from "../../../infrastructure/services/logger-custom.service";
 
 const nameMethod = 'handler'
 

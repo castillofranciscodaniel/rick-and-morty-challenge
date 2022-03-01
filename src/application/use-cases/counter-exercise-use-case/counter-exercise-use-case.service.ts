@@ -1,8 +1,8 @@
 import {Injectable} from '@nestjs/common';
 import {CountResult, ExerciseResult} from "../../dto/count-result";
-import {LOGGER, LoggerCustomService} from "../../../infraestructure/services/logger-custom.service";
+import {LOGGER, LoggerCustomService} from "../../../infrastructure/services/logger-custom.service";
 import {INameable} from "../../../domain/models/INameable";
-import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
 
 const EXERCISE_NAME = 'Char counter'
 const NAME_METHOD = 'handler'

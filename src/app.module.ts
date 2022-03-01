@@ -1,8 +1,8 @@
 import {Module} from '@nestjs/common';
-import {ClientsModule} from "./infraestructure/clients/clients.module";
-import {InfrastructureModule} from './infraestructure/infrastructure-module';
+import {ClientsModule} from "./infrastructure/clients/clients.module";
+import {InfrastructureModule} from './infrastructure/infrastructure-module';
 import {ApplicationModule} from './application/application.module';
-import {DataInMemoryModule} from './infraestructure/services/data-in-memory/data-in-memory.module';
+import {DataInMemoryModule} from './infrastructure/services/data-in-memory/data-in-memory.module';
 
 @Module({
     imports: [ClientsModule, InfrastructureModule, ApplicationModule, DataInMemoryModule],

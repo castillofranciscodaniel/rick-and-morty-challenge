@@ -1,6 +1,6 @@
 import {INameable} from "./INameable";
 
-export class Character implements INameable{
+export interface Character extends INameable{
     id: number;
     name: string;
     status: string;
@@ -15,7 +15,7 @@ export class Character implements INameable{
     created: string;
 }
 
-export class LocationValue {
+export interface LocationValue {
     name: string;
     url: string;
 }

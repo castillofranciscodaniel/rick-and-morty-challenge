@@ -1,10 +1,10 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CounterExerciseUseCaseService} from './counter-exercise-use-case.service';
 import {CountResult} from "../../dto/count-result";
-import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
-import {LocationClientService} from "../../../infraestructure/clients/location-client/location-client.service";
-import {EpisodeClientService} from "../../../infraestructure/clients/episode-client/episode-client.service";
-import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
+import {CharacterClientService} from "../../../infrastructure/clients/character-client/character-client.service";
+import {LocationClientService} from "../../../infrastructure/clients/location-client/location-client.service";
+import {EpisodeClientService} from "../../../infrastructure/clients/episode-client/episode-client.service";
+import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
 import {
     newCharacterPage1,
     newCharacterPage2,
@@ -13,8 +13,8 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../../test/json-to-test";
-import {ClientsModule} from "../../../infraestructure/clients/clients.module";
-import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
+import {ClientsModule} from "../../../infrastructure/clients/clients.module";
+import {DataInMemoryModule} from "../../../infrastructure/services/data-in-memory/data-in-memory.module";
 
 describe('CounterExerciseUseCaseService', () => {
     let service: CounterExerciseUseCaseService;

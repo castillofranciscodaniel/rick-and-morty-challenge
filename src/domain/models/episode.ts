@@ -1,6 +1,6 @@
 import {INameable} from "./INameable";
 
-export class Episode implements INameable{
+export interface Episode extends INameable{
     id: number;
     name: string;
     air_date: string;

@@ -67,18 +67,18 @@ describe('ChallengeResponseController', () => {
             return Promise.resolve(newEpisodePage2());
         });
 
-        const response = await request(app.getHttpServer()).get("");
+        const response = await request(app.getHttpServer()).get("")
+            .expect(200);
 
         expect(response.body[0]).toMatchObject(newExerciseCResultCharCounter());
         expect(response.body).toHaveLength(2);
-        expect(response.statusCode).toBe(200);
 
 
     });
 
     it('should be return an 500 error', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
-           throw new Error('400 error')
+            throw new Error('400 error')
             return Promise.resolve(newLocationPage2())
         });
 

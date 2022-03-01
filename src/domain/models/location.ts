@@ -1,6 +1,6 @@
 import {INameable} from "./INameable";
 
-export class Location implements INameable{
+export interface Location extends INameable {
     id: number;
     name: string;
     type: string;
