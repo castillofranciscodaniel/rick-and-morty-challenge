@@ -1,8 +1,10 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CharacterClientService} from './character-client.service';
 import {HttpModule, HttpService} from "nestjs-http-promise";
-import {newEpisodePage1, newEpisodePage2} from "../../../json-to-test";
+import {newCharacterPage1, newEpisodePage1, newEpisodePage2} from "../../../json-to-test";
 import {AxiosResponse} from "axios";
+import {Character} from "../../../domain/models/character";
+import {Pagination} from "../../dto/pagination";
 
 describe('CharacterClientService', () => {
     let service: CharacterClientService;
@@ -20,8 +22,8 @@ describe('CharacterClientService', () => {
 
     it('should be return a character pagination', async () => {
 
-        const response: AxiosResponse<any> = {
-            data: newEpisodePage1(),
+        const response: AxiosResponse<Pagination<Character>> = {
+            data: newCharacterPage1(),
             headers: {},
             config: {url: 'http://localhost:3000/mockUrl'},
             status: 200,
@@ -33,7 +35,7 @@ describe('CharacterClientService', () => {
             return Promise.resolve(response)
         });
 
-        expect(await service.findAll(1)).toMatchObject(newEpisodePage1());
+        expect(await service.findAll(1)).toMatchObject(newCharacterPage1());
     });
 
     it('should be throw a exception', async () => {
