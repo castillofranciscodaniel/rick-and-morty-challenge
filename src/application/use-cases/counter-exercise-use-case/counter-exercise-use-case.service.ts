@@ -9,12 +9,18 @@ import {
     CountTheLetterEInNamesEpisodeUseCaseService
 } from "../count-the-letter-e-in-names-episode-use-case/count-the-letter-e-in-names-episode-use-case.service";
 import {CountResult, ExerciseResult} from "../../dto/count-result";
+import {LOGGER, LoggerCustomService} from "../../../infraestructure/services/logger-custom.service";
+
+const nameMethod = 'handler'
 
 @Injectable()
 export class CounterExerciseUseCaseService {
 
     private readonly exercise_name;
     private readonly maxTimeToExecuteInMilliseconds;
+
+    private readonly logger: LoggerCustomService = new LoggerCustomService(CounterExerciseUseCaseService.name);
+
 
     constructor(
         private readonly countTheLetterCInNameCharacterUseCaseService: CountTheLetterCInNameCharacterUseCaseService,
@@ -26,6 +32,7 @@ export class CounterExerciseUseCaseService {
     }
 
     async handler(startTime: Date): Promise<ExerciseResult<CountResult>> {
+        this.logger.info(nameMethod, ``, LOGGER.INIT)
 
         const resultAll = await Promise.all(
             [
@@ -39,6 +46,9 @@ export class CounterExerciseUseCaseService {
         const totalTimeMilliseconds = (endTime - startTime.getTime())
         const seconds = Math.trunc(totalTimeMilliseconds / 1000)
         const rest = totalTimeMilliseconds % 1000
+
+
+        this.logger.info(nameMethod, ``, LOGGER.END)
 
         return {
             exercise_name: this.exercise_name,

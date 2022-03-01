@@ -1,12 +1,18 @@
 import {Injectable} from '@nestjs/common';
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
+import {LOGGER, LoggerCustomService} from "../../../infraestructure/services/logger-custom.service";
+
+const nameMethod = 'handler'
 
 @Injectable()
 export class EpisodeLocationsExerciseUseCaseService {
 
     private readonly exercise_name;
     private readonly maxTimeToExecuteInMilliseconds;
+
+    private readonly logger: LoggerCustomService = new LoggerCustomService(EpisodeLocationsExerciseUseCaseService.name);
+
 
     constructor(
         private dataInMemoryService: DataInMemoryService,
@@ -16,6 +22,8 @@ export class EpisodeLocationsExerciseUseCaseService {
     }
 
     async handler(startTime: Date): Promise<ExerciseResult<EpisodeLocationResult>> {
+
+        this.logger.info(nameMethod, ``, LOGGER.INIT)
 
         const episodeLocations: EpisodeLocationResult[] = this.dataInMemoryService.episodes.map(episodes => {
                 const episodeLocation: EpisodeLocationResult = {
@@ -38,7 +46,6 @@ export class EpisodeLocationsExerciseUseCaseService {
             }
         )
 
-
         const endTime = new Date().getTime();
         const totalTimeMilliseconds = (endTime - startTime.getTime())
         const seconds = Math.trunc(totalTimeMilliseconds / 1000)
@@ -51,6 +58,7 @@ export class EpisodeLocationsExerciseUseCaseService {
             results: episodeLocations
         }
 
+        this.logger.info(nameMethod, ``, LOGGER.END)
         return exerciseResult
 
     }
