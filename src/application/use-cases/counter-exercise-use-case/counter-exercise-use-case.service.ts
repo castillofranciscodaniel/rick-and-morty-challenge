@@ -32,9 +32,9 @@ export class CounterExerciseUseCaseService {
 
         const resultAll =
             [
-                this.countLetterCInNamesCharacters(),
                 this.countLetterLInNamesLocations(),
-                this.countLetterEInNamesEpisodes()
+                this.countLetterEInNamesEpisodes(),
+                this.countLetterCInNamesCharacters(),
             ]
 
 
