@@ -27,11 +27,8 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
         characterClientService = module.get<CharacterClientService>(CharacterClientService);
         locationClientService = module.get<LocationClientService>(LocationClientService);
         episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
-        dataInMemoryService= module.get<DataInMemoryService>(DataInMemoryService)
+        dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService)
 
-    });
-
-    it('should be return episode location exercise result', async () => {
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
                 return Promise.resolve(newCharacterPage1())
@@ -47,6 +44,11 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
         });
 
         await dataInMemoryService.load()
+
+    });
+
+    it('should be return episode location exercise result', async () => {
+
         expect(await service.handler()).toMatchObject(matchResponse())
     });
 });
