@@ -8,9 +8,9 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../json-to-test";
-import {LocationClientService} from "../../clients/location-client.service";
-import {CharacterClientService} from "../../clients/character-client.service";
-import {EpisodeClientService} from "../../clients/episode-client.service";
+import {LocationClientService} from "../../clients/location-client/location-client.service";
+import {CharacterClientService} from "../../clients/character-client/character-client.service";
+import {EpisodeClientService} from "../../clients/episode-client/episode-client.service";
 
 describe('DataInMemoryService', () => {
     let service: DataInMemoryService;

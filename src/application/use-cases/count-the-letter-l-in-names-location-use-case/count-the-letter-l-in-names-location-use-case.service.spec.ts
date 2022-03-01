@@ -1,7 +1,7 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterLInNamesLocationUseCaseService} from './count-the-letter-l-in-names-location-use-case.service';
 import {CountResult} from "../../dto/count-result";
-import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
+import {LocationClientService} from "../../../infraestructure/clients/location-client/location-client.service";
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
@@ -12,8 +12,8 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../json-to-test";
-import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
-import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client/episode-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
 
 describe('CountTheLetterLInNamesLocationUseCaseService', () => {
     let service: CountTheLetterLInNamesLocationUseCaseService;

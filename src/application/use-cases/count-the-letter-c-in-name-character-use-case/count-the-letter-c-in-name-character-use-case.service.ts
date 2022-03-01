@@ -1,9 +1,8 @@
 import {Injectable} from '@nestjs/common';
-import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
 import {catchError, mergeMap, Observable, of, throwError, zip} from "rxjs";
 import {CountResult} from "../../dto/count-result";
 import {Character} from "../../../domain/models/character";
-import {Pagination} from "../../../infraestructure/dto/pagination";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 
 @Injectable()

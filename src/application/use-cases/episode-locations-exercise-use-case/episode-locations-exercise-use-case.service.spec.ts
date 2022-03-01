@@ -1,9 +1,9 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {EpisodeLocationsExerciseUseCaseService} from './episode-locations-exercise-use-case.service';
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
-import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
-import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
-import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
+import {LocationClientService} from "../../../infraestructure/clients/location-client/location-client.service";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client/episode-client.service";
 import {
     matchResponse,
     newCharacterPage1,

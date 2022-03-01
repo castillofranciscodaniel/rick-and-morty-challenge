@@ -1,14 +1,14 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterCInNameCharacterUseCaseService} from './count-the-letter-c-in-name-character-use-case.service';
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
-import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
 import {Pagination} from "../../../infraestructure/dto/pagination";
 import {Character} from "../../../domain/models/character";
 import {CountResult} from "../../dto/count-result";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
-import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
-import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client/episode-client.service";
+import {LocationClientService} from "../../../infraestructure/clients/location-client/location-client.service";
 import {
     newCharacterPage1, newCharacterPage2,
     newEpisodePage1,

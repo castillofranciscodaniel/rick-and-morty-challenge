@@ -2,7 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterEInNamesEpisodeUseCaseService} from './count-the-letter-e-in-names-episode-use-case.service';
 import {CountResult} from "../../dto/count-result";
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
-import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client/episode-client.service";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 import {
@@ -12,8 +12,8 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../json-to-test";
-import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
-import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
+import {LocationClientService} from "../../../infraestructure/clients/location-client/location-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
 
 describe('CountTheLetterEInNamesEpisodeUseCaseService', () => {
     let service: CountTheLetterEInNamesEpisodeUseCaseService;

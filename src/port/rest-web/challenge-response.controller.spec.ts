@@ -5,9 +5,9 @@ import {UseCasesModule} from "../../application/use-cases/use-cases.module";
 import {AppModule} from "../../app.module";
 import {HttpModule, HttpService} from "nestjs-http-promise";
 import {INestApplication} from "@nestjs/common";
-import {LocationClientService} from "../../infraestructure/clients/location-client.service";
-import {CharacterClientService} from "../../infraestructure/clients/character-client.service";
-import {EpisodeClientService} from "../../infraestructure/clients/episode-client.service";
+import {LocationClientService} from "../../infraestructure/clients/location-client/location-client.service";
+import {CharacterClientService} from "../../infraestructure/clients/character-client/character-client.service";
+import {EpisodeClientService} from "../../infraestructure/clients/episode-client/episode-client.service";
 import {
     newCharacterPage1,
     newCharacterPage2,
