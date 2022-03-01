@@ -1,7 +1,13 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {DataInMemoryService} from './data-in-memory.service';
 import {ClientsModule} from "../../clients/clients.module";
-import {newLocationPage1, newLocationPage2} from "../../../json-to-test";
+import {
+    newCharacterPage1,
+    newCharacterPage2,
+    newEpisodePage1, newEpisodePage2,
+    newLocationPage1,
+    newLocationPage2
+} from "../../../json-to-test";
 import {LocationClientService} from "../../clients/location-client.service";
 import {CharacterClientService} from "../../clients/character-client.service";
 import {EpisodeClientService} from "../../clients/episode-client.service";
@@ -18,6 +24,10 @@ describe('DataInMemoryService', () => {
             imports: [ClientsModule]
         }).compile();
 
+        episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
+        locationClientService = module.get<LocationClientService>(LocationClientService);
+        characterClientService = module.get<CharacterClientService>(CharacterClientService);
+
         service = module.get<DataInMemoryService>(DataInMemoryService);
     });
 
@@ -27,6 +37,20 @@ describe('DataInMemoryService', () => {
                 return Promise.resolve(newLocationPage1())
             }
             return Promise.resolve(newLocationPage2())
+        });
+
+        jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newCharacterPage1())
+            }
+            return Promise.resolve(newCharacterPage2())
+        });
+
+        jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newEpisodePage1());
+            }
+            return Promise.resolve(newEpisodePage2());
         });
 
         expect(await service.load()).toEqual(true);
