@@ -18,7 +18,8 @@ import { EpisodeLocationsExerciseUseCaseService } from './episode-locations-exer
         CountTheLetterCInNameCharacterUseCaseService,
         CountTheLetterLInNamesLocationUseCaseService,
         CountTheLetterEInNamesEpisodeUseCaseService,
-        CounterExerciseUseCaseService
+        CounterExerciseUseCaseService,
+        EpisodeLocationsExerciseUseCaseService
     ],
     imports: [
         ClientsModule
