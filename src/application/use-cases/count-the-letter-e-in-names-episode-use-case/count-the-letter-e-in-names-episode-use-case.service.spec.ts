@@ -23,6 +23,9 @@ describe('CountTheLetterEInNamesEpisodeUseCaseService', () => {
         dataInMemoryModule = module.get<DataInMemoryService>(DataInMemoryService);
         service = module.get<CountTheLetterEInNamesEpisodeUseCaseService>(CountTheLetterEInNamesEpisodeUseCaseService);
 
+    });
+
+    it('should be return an CountResult', async () => {
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
@@ -32,9 +35,6 @@ describe('CountTheLetterEInNamesEpisodeUseCaseService', () => {
         });
 
         await dataInMemoryModule.load();
-    });
-
-    it('should be return an CountResult', async () => {
 
         const countResult: CountResult = {
             count: 8,
