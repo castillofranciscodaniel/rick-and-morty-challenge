@@ -6,9 +6,7 @@ import {DataInMemoryService} from "../../../infrastructure/services/data-in-memo
 
 const EXERCISE_NAME = 'Char counter'
 const NAME_METHOD = 'handler'
-const COUNT_LETTER_C_IN_NAMES_CHARACTER = 'countLetterCInNamesCharacter'
-const COUNT_LETTER_L_IN_NAMES_LOCATIONS = 'countLetterCInNamesCharacter'
-const COUNT_LETTER_E_IN_NAMES_EPISODES = 'countLetterCInNamesCharacter'
+const COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE = 'countOccurrencesLetterInNamesOfNameable'
 const LETTER_C = 'c'
 const LETTER_L = 'l'
 const LETTER_E = 'e'
@@ -32,9 +30,9 @@ export class CounterExerciseUseCaseService {
 
         const resultAll =
             [
-                this.countLetterLInNamesLocations(),
-                this.countLetterEInNamesEpisodes(),
-                this.countLetterCInNamesCharacters(),
+                this.countOccurrencesLetterInNamesOfNameable(LETTER_L, 'locations', RESOURCE_LOCATION),
+                this.countOccurrencesLetterInNamesOfNameable(LETTER_E, 'episodes', RESOURCE_EPISODE),
+                this.countOccurrencesLetterInNamesOfNameable(LETTER_C, 'characters', RESOURCE_CHARACTER),
             ]
 
 
@@ -70,42 +68,16 @@ export class CounterExerciseUseCaseService {
         return count;
     }
 
-    private countLetterCInNamesCharacters(): CountResult {
-        this.logger.info(COUNT_LETTER_C_IN_NAMES_CHARACTER, ``, LOGGER.INIT);
+    private countOccurrencesLetterInNamesOfNameable(letter: string, memoryKey: string, resource: string): CountResult {
+        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
 
-        const count = this.countResultProcess(LETTER_C, this.dataInMemoryService.characters);
-        this.logger.info(COUNT_LETTER_C_IN_NAMES_CHARACTER, `count: ${count}`, LOGGER.END);
-
-        return {
-            count: count,
-            char: LETTER_C,
-            resource: RESOURCE_CHARACTER,
-        } as CountResult;
-    }
-
-    private countLetterEInNamesEpisodes(): CountResult {
-        this.logger.info(COUNT_LETTER_E_IN_NAMES_EPISODES, ``, LOGGER.INIT);
-
-        const count = this.countResultProcess(LETTER_E, this.dataInMemoryService.episodes);
-        this.logger.info(COUNT_LETTER_E_IN_NAMES_EPISODES, `count: ${count}`, LOGGER.END);
+        const count = this.countResultProcess(letter, this.dataInMemoryService[memoryKey]);
+        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
 
         return {
+            char: letter,
             count: count,
-            char: LETTER_E,
-            resource: RESOURCE_EPISODE,
-        } as CountResult;
-    }
-
-    private countLetterLInNamesLocations(): CountResult {
-        this.logger.info(COUNT_LETTER_L_IN_NAMES_LOCATIONS, ``, LOGGER.INIT);
-
-        const count = this.countResultProcess(LETTER_L, this.dataInMemoryService.locations);
-        this.logger.info(COUNT_LETTER_L_IN_NAMES_LOCATIONS, `count: ${count}`, LOGGER.END);
-
-        return {
-            count: count,
-            char: LETTER_L,
-            resource: RESOURCE_LOCATION,
+            resource: resource,
         } as CountResult;
     }
 

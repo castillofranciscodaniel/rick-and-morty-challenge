@@ -691,18 +691,18 @@ export function newExerciseCResultCharCounter(): ExerciseResult<CountResult> {
         "in_time": true,
         "results": [
             {
-                "count": 2,
                 "char": "l",
+                "count": 2,
                 "resource": "location"
             },
             {
-                "count": 8,
                 "char": "e",
+                "count": 8,
                 "resource": "episode"
             },
             {
-                "count": 4,
                 "char": "c",
+                "count": 4,
                 "resource": "character"
             }
         ]
