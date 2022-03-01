@@ -11,7 +11,7 @@
 ## Run application
 
 ```bash
-docker-compose up
+docker-compose up prod
 ```
 
 ## Run test with coverage
