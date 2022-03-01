@@ -78,7 +78,7 @@ export function newCharacterPage1(): Pagination<Character> {
     }
 }
 
-export function newCharacterPage2(): Pagination<Character | INameable> {
+export function newCharacterPage2(): Pagination<Character> {
     return {
         "info": {
             "count": 826,

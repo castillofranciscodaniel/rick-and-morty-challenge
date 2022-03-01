@@ -7,6 +7,7 @@ import {Episode} from "../../../domain/models/episode";
 export class EpisodeClientService {
     private endpoint = "https://rickandmortyapi.com/api/episode"
 
+
     constructor(private readonly http: HttpService) {
     }
 
