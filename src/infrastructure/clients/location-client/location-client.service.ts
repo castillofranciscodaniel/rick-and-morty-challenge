@@ -19,12 +19,8 @@ export class LocationClientService {
 
         this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT)
 
-        const params = {
-            page: page
-        };
-
         try {
-            const result = await this.http.get<Pagination<Location>>(this.endpoint, {params});
+            const result = await this.http.get<Pagination<Location>>(this.endpoint, {params: {page: page}});
             return result.data;
         } catch (e) {
             this.logger.error(nameMethod, e.message, LOGGER.ERROR);

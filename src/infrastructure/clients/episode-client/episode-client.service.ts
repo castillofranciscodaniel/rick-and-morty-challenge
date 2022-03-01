@@ -18,12 +18,8 @@ export class EpisodeClientService {
     async findAll(page): Promise<Pagination<Episode>> {
         this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT);
 
-        const params = {
-            page: page
-        };
-
         try {
-            const result = await this.http.get<Pagination<Episode>>(this.endpoint, {params});
+            const result = await this.http.get<Pagination<Episode>>(this.endpoint, {params: {page: page}});
             this.logger.info(nameMethod, `page: ${page}`, LOGGER.END);
             return result.data;
 
