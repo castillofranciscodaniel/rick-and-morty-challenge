@@ -4,6 +4,7 @@ import {catchError, mergeMap, Observable, of, throwError, zip} from "rxjs";
 import {CountResult} from "../../dto/count-result";
 import {Character} from "../../../domain/models/character";
 import {Pagination} from "../../../infraestructure/dto/pagination";
+import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 
 @Injectable()
 export class CountTheLetterCInNameCharacterUseCaseService {
@@ -11,7 +12,7 @@ export class CountTheLetterCInNameCharacterUseCaseService {
     private letter = 'c'
     private resource = 'character'
 
-    constructor(private readonly characterClient: CharacterClientService) {
+    constructor(private readonly dataInMemoryService: DataInMemoryService) {
     }
 
     async handler(): Promise<CountResult> {
@@ -22,25 +23,13 @@ export class CountTheLetterCInNameCharacterUseCaseService {
             resource: this.resource,
         }
 
-        const requests: Promise<Pagination<Character>>[] = [];
-        const firstPage = await this.characterClient.findAll(1)
-        this.countResultProcess(countResult, firstPage)
-
-        for (let i = 2; i <= firstPage.info.pages; i++) {
-            requests.push(this.characterClient.findAll(i))
-        }
-
-        await Promise.all(requests).then(thenResults => {
-            thenResults.map(pag => {
-                this.countResultProcess(countResult, pag)
-            })
-        })
+        this.countResultProcess(countResult, this.dataInMemoryService.characters)
 
         return countResult
     }
 
-    private countResultProcess(countResult: CountResult, pagination: Pagination<Character>): void {
-        pagination.results.map((character) => {
+    private countResultProcess(countResult: CountResult, pagination: Character[]): void {
+        pagination.map((character) => {
             for (let i = 0; i < character.name.length; i++) {
                 if (character.name.toLowerCase().charAt(i) === this.letter) {
                     countResult.count++

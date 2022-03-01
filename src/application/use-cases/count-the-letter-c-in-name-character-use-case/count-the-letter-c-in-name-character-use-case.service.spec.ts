@@ -5,30 +5,36 @@ import {CharacterClientService} from "../../../infraestructure/clients/character
 import {Info, Pagination} from "../../../infraestructure/dto/pagination";
 import {Character} from "../../../domain/models/character";
 import {CountResult} from "../../dto/count-result";
+import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
+import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 
 describe('CountTheLetterCInNameCharacterUseCaseService', () => {
     let service: CountTheLetterCInNameCharacterUseCaseService;
     let characterClientService: CharacterClientService;
+    let dataInMemoryService: DataInMemoryService
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [CountTheLetterCInNameCharacterUseCaseService],
-            imports: [ClientsModule],
+            imports: [ClientsModule, DataInMemoryModule],
         }).compile();
 
 
         characterClientService = module.get<CharacterClientService>(CharacterClientService);
-
+        dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService);
         service = module.get<CountTheLetterCInNameCharacterUseCaseService>(CountTheLetterCInNameCharacterUseCaseService);
-    });
 
-    it('should be return an CountResult', async () => {
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
                 return Promise.resolve(newCharacterPage1())
             }
             return Promise.resolve(newCharacterPage2())
         });
+
+        await dataInMemoryService.load()
+    });
+
+    it('should be return an CountResult', async () => {
 
         const countResult: CountResult = {
             count: 24,
