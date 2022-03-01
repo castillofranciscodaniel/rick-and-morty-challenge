@@ -78,10 +78,9 @@ export class DataInMemoryService {
             requests.push(this.characterClientService.findAll(i));
         }
 
-        await Promise.all(requests).then(thenResults => {
-            thenResults.map(pag => {
-                characters = characters.concat(pag.results);
-            })
+        const thenResults = await Promise.all(requests)
+        thenResults.map(pag => {
+            characters = characters.concat(pag.results);
         })
 
         return characters
@@ -98,11 +97,10 @@ export class DataInMemoryService {
             requests.push(this.episodeClientService.findAll(i));
         }
 
-        await Promise.all(requests).then(thenResults => {
-            thenResults.map(pag => {
-                episodes = episodes.concat(pag.results);
-            })
-        });
+        const thenResults = await Promise.all(requests)
+        thenResults.map(pag => {
+            episodes = episodes.concat(pag.results);
+        })
 
         return episodes;
     }
@@ -118,11 +116,10 @@ export class DataInMemoryService {
             requests.push(this.locationClientService.findAll(i));
         }
 
-        await Promise.all(requests).then(thenResults => {
-            thenResults.map(pag => {
-                locations = locations.concat(pag.results);
-            })
-        });
+        const thenResults = await Promise.all(requests)
+        thenResults.map(pag => {
+            locations = locations.concat(pag.results);
+        })
 
         return locations;
     }
