@@ -1,4 +1,4 @@
-import {Pagination} from "../src/infraestructure/dto/pagination";
+import {Pagination} from "../src/infrastructure/dto/pagination";
 import {Character} from "../src/domain/models/character";
 import {Episode} from "../src/domain/models/episode";
 import {Location} from "../src/domain/models/location";
