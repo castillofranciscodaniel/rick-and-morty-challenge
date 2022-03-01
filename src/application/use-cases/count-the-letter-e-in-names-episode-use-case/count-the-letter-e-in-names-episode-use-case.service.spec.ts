@@ -34,10 +34,6 @@ describe('CountTheLetterEInNamesEpisodeUseCaseService', () => {
         await dataInMemoryModule.load();
     });
 
-    it('should be defined', () => {
-        expect(service).toBeDefined();
-    });
-
     it('should be return an CountResult', async () => {
 
         const countResult: CountResult = {

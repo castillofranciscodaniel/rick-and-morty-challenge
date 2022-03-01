@@ -6,26 +6,24 @@ import {Pagination} from "../../../infraestructure/dto/pagination";
 import {Episode} from "../../../domain/models/episode";
 import {Location} from "../../../domain/models/location";
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
+import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
+import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 
 describe('CountTheLetterLInNamesLocationUseCaseService', () => {
     let service: CountTheLetterLInNamesLocationUseCaseService;
-    let locationClientService: LocationClientService
+    let locationClientService: LocationClientService;
+    let dataInMemoryService: DataInMemoryService;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [CountTheLetterLInNamesLocationUseCaseService],
-            imports: [ClientsModule]
+            imports: [ClientsModule, DataInMemoryModule]
         }).compile();
 
         locationClientService = module.get<LocationClientService>(LocationClientService);
+        dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService);
         service = module.get<CountTheLetterLInNamesLocationUseCaseService>(CountTheLetterLInNamesLocationUseCaseService);
-    });
 
-    it('should be defined', () => {
-        expect(service).toBeDefined();
-    });
-
-    it('should be return an CountResult', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
                 return Promise.resolve(newEpisodePage1())
@@ -33,11 +31,17 @@ describe('CountTheLetterLInNamesLocationUseCaseService', () => {
             return Promise.resolve(newEpisodePage2())
         });
 
+        await dataInMemoryService.load()
+    });
+
+    it('should be return an CountResult', async () => {
+
+
         const countResult: CountResult = {
             count: 2,
             char: 'l',
             resource: 'location',
-        }
+        };
 
         expect(await service.handler()).toStrictEqual(countResult);
     });
