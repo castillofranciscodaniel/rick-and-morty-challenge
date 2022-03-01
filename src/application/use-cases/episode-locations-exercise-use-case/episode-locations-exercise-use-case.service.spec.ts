@@ -62,7 +62,7 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
 
         await dataInMemoryService.load()
 
-        expect(await service.handler()).toMatchObject(matchResponse())
+        expect(await service.handler(new Date())).toMatchObject(matchResponse())
     });
 });
 

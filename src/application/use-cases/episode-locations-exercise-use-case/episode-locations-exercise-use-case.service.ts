@@ -15,8 +15,7 @@ export class EpisodeLocationsExerciseUseCaseService {
         this.maxTimeToExecuteInMilliseconds = 3000
     }
 
-    async handler(): Promise<ExerciseResult<EpisodeLocationResult>> {
-        const startTime = new Date().getTime();
+    async handler(startTime: Date): Promise<ExerciseResult<EpisodeLocationResult>> {
 
         const episodeLocations: EpisodeLocationResult[] = this.dataInMemoryService.episodes.map(episodes => {
                 const episodeLocation: EpisodeLocationResult = {
@@ -41,7 +40,7 @@ export class EpisodeLocationsExerciseUseCaseService {
 
 
         const endTime = new Date().getTime();
-        const totalTimeMilliseconds = (endTime - startTime)
+        const totalTimeMilliseconds = (endTime - startTime.getTime())
         const seconds = Math.trunc(totalTimeMilliseconds / 1000)
         const rest = totalTimeMilliseconds % 1000
 

@@ -35,14 +35,14 @@ export class ChallengeResponseController {
 
     @Get('/challengeResult')
     async handler(): Promise<ExerciseResult<CountResult | EpisodeLocationResult>[]> {
-        const startTime = new Date().getTime();
+        const startTime = new Date();
 
         await this.dataInMemoryService.load()
 
         return Promise.all<ExerciseResult<CountResult | EpisodeLocationResult>>(
             [
-                this.counterExerciseUseCaseService.handler(),
-                this.episodeLocationsExerciseUseCaseService.handler()
+                this.counterExerciseUseCaseService.handler(startTime),
+                this.episodeLocationsExerciseUseCaseService.handler(startTime)
             ]
         )
 
