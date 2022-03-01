@@ -12,7 +12,7 @@ describe('CounterExerciseUseCaseService', () => {
     let countTheLetterEInNamesEpisodeUseCaseService: CountTheLetterEInNamesEpisodeUseCaseService;
     let countTheLetterCInNameCharacterUseCaseService: CountTheLetterCInNameCharacterUseCaseService;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [UseCasesModule],
             providers: [CounterExerciseUseCaseService],
