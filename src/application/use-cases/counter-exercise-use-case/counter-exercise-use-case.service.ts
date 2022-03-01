@@ -7,6 +7,7 @@ import {DataInMemoryService} from "../../../infrastructure/services/data-in-memo
 const EXERCISE_NAME = 'Char counter'
 const NAME_METHOD = 'handler'
 const COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE = 'countOccurrencesLetterInNamesOfNameable'
+const COUNT_RESULT_PROCES = 'countResultProcess'
 const LETTER_C = 'c'
 const LETTER_L = 'l'
 const LETTER_E = 'e'
@@ -26,7 +27,7 @@ export class CounterExerciseUseCaseService {
     }
 
     handler(startTime: Date): ExerciseResult<CountResult> {
-        this.logger.info(NAME_METHOD, ``, LOGGER.INIT)
+        this.logger.info(NAME_METHOD, `startTime: ${startTime}`, LOGGER.INIT)
 
         const resultAll =
             [
@@ -36,13 +37,13 @@ export class CounterExerciseUseCaseService {
             ]
 
 
-        const endTime = new Date().getTime();
-        const totalTimeMilliseconds = (endTime - startTime.getTime());
+        const endTime = new Date();
+        const totalTimeMilliseconds = (endTime.getTime() - startTime.getTime());
         const seconds = Math.trunc(totalTimeMilliseconds / 1000);
         const rest = totalTimeMilliseconds % 1000;
 
 
-        this.logger.info(NAME_METHOD, ``, LOGGER.END);
+        this.logger.info(NAME_METHOD, `endTime: ${endTime}. Total time: ${seconds}s ${rest}ms`, LOGGER.END);
 
         return {
             exercise_name: EXERCISE_NAME,
@@ -53,10 +54,10 @@ export class CounterExerciseUseCaseService {
     }
 
     private countResultProcess(letter: string, contTheLetters: INameable[]): number {
-        this.logger.info(NAME_METHOD, ``, LOGGER.INIT);
+        this.logger.info(COUNT_RESULT_PROCES, ``, LOGGER.INIT);
 
         let count = 0;
-        contTheLetters.map(character => {
+        contTheLetters.forEach(character => {
             for (let i = 0; i < character.name.length; i++) {
                 if (character.name.toLowerCase().charAt(i) === letter) {
                     count++;
@@ -64,7 +65,7 @@ export class CounterExerciseUseCaseService {
             }
         })
 
-        this.logger.info(NAME_METHOD, `count: ${count}`, LOGGER.END);
+        this.logger.info(COUNT_RESULT_PROCES, `count: ${count}`, LOGGER.END);
         return count;
     }
 

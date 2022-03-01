@@ -3,7 +3,7 @@ import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
 import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
 import {LOGGER, LoggerCustomService} from "../../../infrastructure/services/logger-custom.service";
 
-const nameMethod = 'handler'
+const NAME_METHOD = 'handler'
 
 @Injectable()
 export class EpisodeLocationsExerciseUseCaseService {
@@ -23,7 +23,7 @@ export class EpisodeLocationsExerciseUseCaseService {
 
     handler(startTime: Date): ExerciseResult<EpisodeLocationResult> {
 
-        this.logger.info(nameMethod, ``, LOGGER.INIT)
+        this.logger.info(NAME_METHOD, `startTime: ${startTime}`, LOGGER.INIT)
 
         const episodeLocations: EpisodeLocationResult[] = this.dataInMemoryService.episodes.map(episodes => {
                 const episodeLocation: EpisodeLocationResult = {
@@ -60,7 +60,7 @@ export class EpisodeLocationsExerciseUseCaseService {
             results: episodeLocations
         };
 
-        this.logger.info(nameMethod, ``, LOGGER.END);
+        this.logger.info(NAME_METHOD, `endTime: ${endTime}. Total time: ${seconds}s ${rest}ms`, LOGGER.END);
         return exerciseResult;
 
     }
