@@ -11,7 +11,7 @@ import {EpisodeClientService} from "../clients/episode-client/episode-client.ser
 import {
     newCharacterPage1,
     newCharacterPage2,
-    newEpisodePage1, newEpisodePage2,
+    newEpisodePage1, newEpisodePage2, newExerciseCResultCharCounter,
     newLocationPage1,
     newLocationPage2
 } from "../../../test/json-to-test";
@@ -105,26 +105,4 @@ describe('ChallengeResponseController', () => {
 
 });
 
-function newExerciseCResultCharCounter(): ExerciseResult<CountResult> {
-    return {
-        "exercise_name": "Char counter",
-        "in_time": true,
-        "results": [
-            {
-                "count": 4,
-                "char": "c",
-                "resource": "character"
-            },
-            {
-                "count": 2,
-                "char": "l",
-                "resource": "location"
-            },
-            {
-                "count": 8,
-                "char": "e",
-                "resource": "episode"
-            }
-        ]
-    }
-}
+

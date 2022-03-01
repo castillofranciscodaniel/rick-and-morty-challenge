@@ -2,7 +2,7 @@ import {Pagination} from "../src/infraestructure/dto/pagination";
 import {Character} from "../src/domain/models/character";
 import {Episode} from "../src/domain/models/episode";
 import {Location} from "../src/domain/models/location";
-import {EpisodeLocationResult, ExerciseResult} from "../src/application/dto/count-result";
+import {CountResult, EpisodeLocationResult, ExerciseResult} from "../src/application/dto/count-result";
 import {INameable} from "../src/domain/models/INameable";
 
 export function newCharacterPage1(): Pagination<Character> {
@@ -680,6 +680,30 @@ export function matchResponse(): ExerciseResult<EpisodeLocationResult> {
                     "Citadel of Ricks",
                     "Earth (Replacement Dimension)"
                 ]
+            }
+        ]
+    }
+}
+
+export function newExerciseCResultCharCounter(): ExerciseResult<CountResult> {
+    return {
+        "exercise_name": "Char counter",
+        "in_time": true,
+        "results": [
+            {
+                "count": 4,
+                "char": "c",
+                "resource": "character"
+            },
+            {
+                "count": 2,
+                "char": "l",
+                "resource": "location"
+            },
+            {
+                "count": 8,
+                "char": "e",
+                "resource": "episode"
             }
         ]
     }

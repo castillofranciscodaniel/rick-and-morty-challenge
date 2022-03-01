@@ -1,44 +1,40 @@
 import {Injectable} from '@nestjs/common';
-import {
-    CountTheLetterCInNameCharacterUseCaseService
-} from "../count-the-letter-c-in-name-character-use-case/count-the-letter-c-in-name-character-use-case.service";
-import {
-    CountTheLetterLInNamesLocationUseCaseService
-} from "../count-the-letter-l-in-names-location-use-case/count-the-letter-l-in-names-location-use-case.service";
-import {
-    CountTheLetterEInNamesEpisodeUseCaseService
-} from "../count-the-letter-e-in-names-episode-use-case/count-the-letter-e-in-names-episode-use-case.service";
 import {CountResult, ExerciseResult} from "../../dto/count-result";
 import {LOGGER, LoggerCustomService} from "../../../infraestructure/services/logger-custom.service";
+import {INameable} from "../../../domain/models/INameable";
+import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 
-const nameMethod = 'handler'
+const EXERCISE_NAME = 'Char counter'
+const NAME_METHOD = 'handler'
+const COUNT_LETTER_C_IN_NAMES_CHARACTER = 'countLetterCInNamesCharacter'
+const COUNT_LETTER_L_IN_NAMES_LOCATIONS = 'countLetterCInNamesCharacter'
+const COUNT_LETTER_E_IN_NAMES_EPISODES = 'countLetterCInNamesCharacter'
+const LETTER_C = 'c'
+const LETTER_L = 'l'
+const LETTER_E = 'e'
+const RESOURCE_CHARACTER = 'character'
+const RESOURCE_EPISODE = 'episode'
+const RESOURCE_LOCATION = 'location'
+const MAX_TIME_TO_EXECUTE_IN_MILLISECONDS = 3000
 
 @Injectable()
 export class CounterExerciseUseCaseService {
-
-    private readonly exercise_name;
-    private readonly maxTimeToExecuteInMilliseconds;
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(CounterExerciseUseCaseService.name);
 
 
     constructor(
-        private readonly countTheLetterCInNameCharacterUseCaseService: CountTheLetterCInNameCharacterUseCaseService,
-        private readonly countTheLetterIInNamesLocationUseCaseService: CountTheLetterLInNamesLocationUseCaseService,
-        private readonly countTheLetterEInNamesEpisodeUseCaseService: CountTheLetterEInNamesEpisodeUseCaseService
-    ) {
-        this.exercise_name = 'Char counter';
-        this.maxTimeToExecuteInMilliseconds = 3000
+        private readonly dataInMemoryService: DataInMemoryService) {
     }
 
     handler(startTime: Date): ExerciseResult<CountResult> {
-        this.logger.info(nameMethod, ``, LOGGER.INIT)
+        this.logger.info(NAME_METHOD, ``, LOGGER.INIT)
 
         const resultAll =
             [
-                this.countTheLetterCInNameCharacterUseCaseService.handler(),
-                this.countTheLetterIInNamesLocationUseCaseService.handler(),
-                this.countTheLetterEInNamesEpisodeUseCaseService.handler()
+                this.countLetterCInNamesCharacters(),
+                this.countLetterLInNamesLocations(),
+                this.countLetterEInNamesEpisodes()
             ]
 
 
@@ -48,14 +44,69 @@ export class CounterExerciseUseCaseService {
         const rest = totalTimeMilliseconds % 1000;
 
 
-        this.logger.info(nameMethod, ``, LOGGER.END);
+        this.logger.info(NAME_METHOD, ``, LOGGER.END);
 
         return {
-            exercise_name: this.exercise_name,
+            exercise_name: EXERCISE_NAME,
             time: `${seconds}s ${rest}ms`,
-            in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInMilliseconds,
+            in_time: totalTimeMilliseconds <= MAX_TIME_TO_EXECUTE_IN_MILLISECONDS,
             results: resultAll
         } as ExerciseResult<CountResult>;
+    }
+
+    private countResultProcess(letter: string, contTheLetters: INameable[]): number {
+        this.logger.info(NAME_METHOD, ``, LOGGER.INIT);
+
+        let count = 0;
+        contTheLetters.map(character => {
+            for (let i = 0; i < character.name.length; i++) {
+                if (character.name.toLowerCase().charAt(i) === letter) {
+                    count++;
+                }
+            }
+        })
+
+        this.logger.info(NAME_METHOD, `count: ${count}`, LOGGER.END);
+        return count;
+    }
+
+    private countLetterCInNamesCharacters(): CountResult {
+        this.logger.info(COUNT_LETTER_C_IN_NAMES_CHARACTER, ``, LOGGER.INIT);
+
+        const count = this.countResultProcess(LETTER_C, this.dataInMemoryService.characters);
+        this.logger.info(COUNT_LETTER_C_IN_NAMES_CHARACTER, `count: ${count}`, LOGGER.END);
+
+        return {
+            count: count,
+            char: LETTER_C,
+            resource: RESOURCE_CHARACTER,
+        } as CountResult;
+    }
+
+    private countLetterEInNamesEpisodes(): CountResult {
+        this.logger.info(COUNT_LETTER_E_IN_NAMES_EPISODES, ``, LOGGER.INIT);
+
+        const count = this.countResultProcess(LETTER_E, this.dataInMemoryService.episodes);
+        this.logger.info(COUNT_LETTER_E_IN_NAMES_EPISODES, `count: ${count}`, LOGGER.END);
+
+        return {
+            count: count,
+            char: LETTER_E,
+            resource: RESOURCE_EPISODE,
+        } as CountResult;
+    }
+
+    private countLetterLInNamesLocations(): CountResult {
+        this.logger.info(COUNT_LETTER_L_IN_NAMES_LOCATIONS, ``, LOGGER.INIT);
+
+        const count = this.countResultProcess(LETTER_L, this.dataInMemoryService.locations);
+        this.logger.info(COUNT_LETTER_L_IN_NAMES_LOCATIONS, `count: ${count}`, LOGGER.END);
+
+        return {
+            count: count,
+            char: LETTER_L,
+            resource: RESOURCE_LOCATION,
+        } as CountResult;
     }
 
 }

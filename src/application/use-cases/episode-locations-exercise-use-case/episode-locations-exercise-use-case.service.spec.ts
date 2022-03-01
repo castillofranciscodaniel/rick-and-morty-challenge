@@ -30,11 +30,13 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
             imports: [ClientsModule, DataInMemoryModule]
         }).compile();
 
-        service = module.get<EpisodeLocationsExerciseUseCaseService>(EpisodeLocationsExerciseUseCaseService);
+
         characterClientService = module.get<CharacterClientService>(CharacterClientService);
         locationClientService = module.get<LocationClientService>(LocationClientService);
         episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
         dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService)
+        
+        service = module.get<EpisodeLocationsExerciseUseCaseService>(EpisodeLocationsExerciseUseCaseService);
 
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
