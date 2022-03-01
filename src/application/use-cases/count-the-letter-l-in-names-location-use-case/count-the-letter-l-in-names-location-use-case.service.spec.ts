@@ -76,7 +76,7 @@ describe('CountTheLetterLInNamesLocationUseCaseService', () => {
             resource: 'location',
         };
 
-        expect(await service.handler()).toStrictEqual(countResult);
+        expect(service.handler()).toStrictEqual(countResult);
     });
 
 });

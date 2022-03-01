@@ -43,11 +43,11 @@ export class ChallengeResponseController {
         }
 
         this.logger.info(nameMethod, ``, LOGGER.END)
-        return Promise.all<ExerciseResult<CountResult | EpisodeLocationResult>>(
-            [
-                this.counterExerciseUseCaseService.handler(startTime),
-                this.episodeLocationsExerciseUseCaseService.handler(startTime)
-            ]
-        )
+
+        return [
+            this.counterExerciseUseCaseService.handler(startTime),
+            this.episodeLocationsExerciseUseCaseService.handler(startTime)
+        ]
+
     }
 }

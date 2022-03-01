@@ -10,9 +10,9 @@ import {
     newCharacterPage2,
     newEpisodePage1,
     newEpisodePage2,
-    newLocationPage1, newLocationPage2
+    newLocationPage1,
+    newLocationPage2
 } from "../../../json-to-test";
-import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 
@@ -63,6 +63,6 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
 
         await dataInMemoryService.load()
 
-        expect(await service.handler(new Date())).toMatchObject(matchResponse())
+        expect(service.handler(new Date())).toMatchObject(matchResponse())
     });
 });

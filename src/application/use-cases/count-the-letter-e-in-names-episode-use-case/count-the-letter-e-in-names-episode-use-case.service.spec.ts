@@ -74,7 +74,7 @@ describe('CountTheLetterEInNamesEpisodeUseCaseService', () => {
             resource: 'episode',
         };
 
-        expect(await service.handler()).toStrictEqual(countResult);
+        expect(service.handler()).toStrictEqual(countResult);
     });
 
 });

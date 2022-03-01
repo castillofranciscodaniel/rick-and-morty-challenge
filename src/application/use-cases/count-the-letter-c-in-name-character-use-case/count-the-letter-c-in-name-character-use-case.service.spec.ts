@@ -2,8 +2,6 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {CountTheLetterCInNameCharacterUseCaseService} from './count-the-letter-c-in-name-character-use-case.service';
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
 import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
-import {Pagination} from "../../../infraestructure/dto/pagination";
-import {Character} from "../../../domain/models/character";
 import {CountResult} from "../../dto/count-result";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
@@ -76,6 +74,6 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
         await dataInMemoryService.load()
 
 
-        expect(await service.handler()).toStrictEqual(countResult);
+        expect(service.handler()).toStrictEqual(countResult);
     });
 });

@@ -34,23 +34,23 @@ describe('CounterExerciseUseCaseService', () => {
         expect(service).toBeDefined();
     });
 
-    it('should be return an ExerciseResult', async () => {
+    it('should be return an ExerciseResult',  () => {
 
         jest.spyOn(countTheLetterCInNameCharacterUseCaseService, 'handler').mockImplementation(() => {
-            return Promise.resolve(newPageResultC());
+            return newPageResultC();
         });
 
         jest.spyOn(countTheLetterLInNamesLocationUseCaseService, 'handler').mockImplementation(() => {
-            return Promise.resolve(newPageResultL());
+            return newPageResultL();
         });
 
         jest.spyOn(countTheLetterEInNamesEpisodeUseCaseService, 'handler').mockImplementation(() => {
-            return Promise.resolve(newPageResultE());
+            return newPageResultE();
         });
 
 
         // c l e
-        const response = await service.handler(new Date());
+        const response = service.handler(new Date());
 
         expect(response).toMatchObject({exercise_name: 'Char counter', in_time: true})
         expect(response).toMatchObject({

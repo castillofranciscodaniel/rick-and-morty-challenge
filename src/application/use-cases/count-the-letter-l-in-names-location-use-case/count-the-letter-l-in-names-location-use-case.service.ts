@@ -17,7 +17,7 @@ export class CountTheLetterLInNamesLocationUseCaseService {
     constructor(private readonly dataInMemoryService: DataInMemoryService, private countCharactersService: CountCharactersInINameableService) {
     }
 
-    async handler(): Promise<CountResult> {
+    handler(): CountResult {
 
         this.logger.info(nameMethod, ``, LOGGER.INIT)
 

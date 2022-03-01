@@ -19,7 +19,7 @@ export class CountTheLetterEInNamesEpisodeUseCaseService {
     }
 
 
-    async handler(): Promise<CountResult> {
+    handler(): CountResult {
         this.logger.info(nameMethod, ``, LOGGER.INIT)
 
         const count = this.countCharactersInINameableService.countResultProcess(this.letter, this.dataInMemoryService.episodes);

@@ -18,7 +18,7 @@ export class CountTheLetterCInNameCharacterUseCaseService {
     constructor(private readonly dataInMemoryService: DataInMemoryService, private countCharactersInINameableService: CountCharactersInINameableService) {
     }
 
-    async handler(): Promise<CountResult> {
+     handler(): CountResult {
         this.logger.info(nameMethod, ``, LOGGER.INIT)
 
         const count = this.countCharactersInINameableService.countResultProcess(this.letter, this.dataInMemoryService.characters);

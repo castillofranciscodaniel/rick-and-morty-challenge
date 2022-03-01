@@ -31,16 +31,16 @@ export class CounterExerciseUseCaseService {
         this.maxTimeToExecuteInMilliseconds = 3000
     }
 
-    async handler(startTime: Date): Promise<ExerciseResult<CountResult>> {
+    handler(startTime: Date): ExerciseResult<CountResult> {
         this.logger.info(nameMethod, ``, LOGGER.INIT)
 
-        const resultAll = await Promise.all(
+        const resultAll =
             [
                 this.countTheLetterCInNameCharacterUseCaseService.handler(),
                 this.countTheLetterIInNamesLocationUseCaseService.handler(),
                 this.countTheLetterEInNamesEpisodeUseCaseService.handler()
             ]
-        )
+
 
         const endTime = new Date().getTime();
         const totalTimeMilliseconds = (endTime - startTime.getTime())

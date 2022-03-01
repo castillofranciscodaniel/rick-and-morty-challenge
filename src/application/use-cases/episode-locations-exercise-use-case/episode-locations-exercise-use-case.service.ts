@@ -21,7 +21,7 @@ export class EpisodeLocationsExerciseUseCaseService {
         this.maxTimeToExecuteInMilliseconds = 3000
     }
 
-    async handler(startTime: Date): Promise<ExerciseResult<EpisodeLocationResult>> {
+    handler(startTime: Date): ExerciseResult<EpisodeLocationResult> {
 
         this.logger.info(nameMethod, ``, LOGGER.INIT)
 
