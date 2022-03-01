@@ -1,7 +1,7 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CharacterClientService} from './character-client.service';
 import {HttpModule, HttpService} from "nestjs-http-promise";
-import {newCharacterPage1} from "../../../json-to-test";
+import {newCharacterPage1} from "../../../../test/json-to-test";
 import {AxiosResponse} from "axios";
 import {Character} from "../../../domain/models/character";
 import {Pagination} from "../../dto/pagination";

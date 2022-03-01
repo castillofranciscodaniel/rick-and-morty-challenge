@@ -1,9 +1,9 @@
-import {Pagination} from "./infraestructure/dto/pagination";
-import {Character} from "./domain/models/character";
-import {Episode} from "./domain/models/episode";
-import {Location} from "./domain/models/location";
-import {EpisodeLocationResult, ExerciseResult} from "./application/dto/count-result";
-import {INameable} from "./domain/models/INameable";
+import {Pagination} from "../src/infraestructure/dto/pagination";
+import {Character} from "../src/domain/models/character";
+import {Episode} from "../src/domain/models/episode";
+import {Location} from "../src/domain/models/location";
+import {EpisodeLocationResult, ExerciseResult} from "../src/application/dto/count-result";
+import {INameable} from "../src/domain/models/INameable";
 
 export function newCharacterPage1(): Pagination<Character> {
     return {

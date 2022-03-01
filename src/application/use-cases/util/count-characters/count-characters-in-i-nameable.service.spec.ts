@@ -1,6 +1,6 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {CountCharactersInINameableService} from './count-characters-in-i-nameable.service';
-import {newCharacterPage2} from "../../../../json-to-test";
+import {newCharacterPage2} from "../../../../../test/json-to-test";
 
 describe('CountCharactersService', () => {
     let service: CountCharactersInINameableService;

@@ -8,7 +8,7 @@ import {
     newEpisodePage2,
     newLocationPage1,
     newLocationPage2
-} from "../../../json-to-test";
+} from "../../../../test/json-to-test";
 import {LocationClientService} from "../../clients/location-client/location-client.service";
 import {CharacterClientService} from "../../clients/character-client/character-client.service";
 import {EpisodeClientService} from "../../clients/episode-client/episode-client.service";

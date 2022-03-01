@@ -27,7 +27,7 @@ export class ChallengeResponseController {
     ) {
     }
 
-    @Get('/challengeResult')
+    @Get()
     async handler(): Promise<ExerciseResult<CountResult | EpisodeLocationResult>[]> {
         this.logger.info(nameMethod, '', LOGGER.INIT)
 

@@ -3,7 +3,7 @@ import {LocationClientService} from './location-client.service';
 import {HttpModule, HttpService} from "nestjs-http-promise";
 import {AxiosResponse} from "axios";
 import {Pagination} from "../../dto/pagination";
-import {newLocationPage1} from "../../../json-to-test";
+import {newLocationPage1} from "../../../../test/json-to-test";
 import {Location} from "../../../domain/models/location";
 
 describe('LocationClientService', () => {

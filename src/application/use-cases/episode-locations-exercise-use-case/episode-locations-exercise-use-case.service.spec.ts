@@ -12,7 +12,7 @@ import {
     newEpisodePage2,
     newLocationPage1,
     newLocationPage2
-} from "../../../json-to-test";
+} from "../../../../test/json-to-test";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 

@@ -13,7 +13,7 @@ import {
     newEpisodePage2,
     newLocationPage1,
     newLocationPage2
-} from "../../../json-to-test";
+} from "../../../../test/json-to-test";
 import {CountCharactersInINameableService} from "../util/count-characters/count-characters-in-i-nameable.service";
 import {UseCasesModule} from "../use-cases.module";
 

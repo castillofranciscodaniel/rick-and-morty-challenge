@@ -2,7 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {EpisodeClientService} from './episode-client.service';
 import {HttpModule, HttpService} from "nestjs-http-promise";
 import {AxiosResponse} from "axios";
-import {newEpisodePage1} from "../../../json-to-test";
+import {newEpisodePage1} from "../../../../test/json-to-test";
 import {Pagination} from "../../dto/pagination";
 import {Episode} from "../../../domain/models/episode";
 

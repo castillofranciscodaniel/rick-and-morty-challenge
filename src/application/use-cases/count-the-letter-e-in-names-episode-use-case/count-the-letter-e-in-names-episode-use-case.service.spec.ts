@@ -12,7 +12,7 @@ import {
     newEpisodePage2,
     newLocationPage1,
     newLocationPage2
-} from "../../../json-to-test";
+} from "../../../../test/json-to-test";
 import {LocationClientService} from "../../../infraestructure/clients/location-client/location-client.service";
 import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
 import {CountCharactersInINameableService} from "../util/count-characters/count-characters-in-i-nameable.service";

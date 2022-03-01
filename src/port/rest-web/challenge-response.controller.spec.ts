@@ -14,7 +14,7 @@ import {
     newEpisodePage1, newEpisodePage2,
     newLocationPage1,
     newLocationPage2
-} from "../../json-to-test";
+} from "../../../test/json-to-test";
 
 const request = require('supertest');
 
