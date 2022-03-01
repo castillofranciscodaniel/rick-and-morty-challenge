@@ -1,17 +1,5 @@
-import {Controller, Get, HttpException, Scope} from '@nestjs/common';
-import {catchError, map, Observable, throwError} from "rxjs";
-import {
-    CountTheLetterCInNameCharacterUseCaseService
-} from "../../application/use-cases/count-the-letter-c-in-name-character-use-case/count-the-letter-c-in-name-character-use-case.service";
+import {Controller, Get, Scope} from '@nestjs/common';
 import {CountResult, EpisodeLocationResult, ExerciseResult} from "../../application/dto/count-result";
-import {Character} from "../../domain/models/character";
-import {Pagination} from "../../infraestructure/dto/pagination";
-import {
-    CountTheLetterLInNamesLocationUseCaseService
-} from "../../application/use-cases/count-the-letter-l-in-names-location-use-case/count-the-letter-l-in-names-location-use-case.service";
-import {
-    CountTheLetterEInNamesEpisodeUseCaseService
-} from "../../application/use-cases/count-the-letter-e-in-names-episode-use-case/count-the-letter-e-in-names-episode-use-case.service";
 import {
     CounterExerciseUseCaseService
 } from "../../application/use-cases/counter-exercise-use-case/counter-exercise-use-case.service";
@@ -19,12 +7,18 @@ import {
     EpisodeLocationsExerciseUseCaseService
 } from "../../application/use-cases/episode-locations-exercise-use-case/episode-locations-exercise-use-case.service";
 import {DataInMemoryService} from "../../infraestructure/services/data-in-memory/data-in-memory.service";
+import {LOGGER, LoggerCustomService} from "../../infraestructure/services/logger-custom.service";
+
+const nameMethod = 'handler'
 
 @Controller({
     path: "/",
     scope: Scope.REQUEST
 })
 export class ChallengeResponseController {
+
+    private readonly logger: LoggerCustomService = new LoggerCustomService(ChallengeResponseController.name);
+
 
     constructor(
         private readonly dataInMemoryService: DataInMemoryService,
@@ -36,6 +30,8 @@ export class ChallengeResponseController {
     @Get('/challengeResult')
     async handler(): Promise<ExerciseResult<CountResult | EpisodeLocationResult>[]> {
         const startTime = new Date();
+
+        this.logger.info(nameMethod, '', LOGGER.INIT)
 
         await this.dataInMemoryService.load()
 

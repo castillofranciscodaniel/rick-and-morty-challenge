@@ -18,7 +18,7 @@ describe('DataInMemoryService', () => {
     let characterClientService: CharacterClientService
     let episodeClientService: EpisodeClientService
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [DataInMemoryService],
             imports: [ClientsModule]
@@ -31,7 +31,7 @@ describe('DataInMemoryService', () => {
         service = module.get<DataInMemoryService>(DataInMemoryService);
     });
 
-    it('should be return true', async () => {
+    it('should be not throw', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
                 return Promise.resolve(newLocationPage1())
@@ -52,7 +52,28 @@ describe('DataInMemoryService', () => {
             }
             return Promise.resolve(newEpisodePage2());
         });
+        await expect(service.load()).resolves.not.toThrow();
+    });
 
-        expect(await service.load()).toEqual(true);
+    it('should be throw', async () => {
+        jest.spyOn(locationClientService, 'findAll').mockImplementation(() => {
+           throw new Error('error 400')
+        });
+
+        jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newCharacterPage1())
+            }
+            return Promise.resolve(newCharacterPage2())
+        });
+
+        jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newEpisodePage1());
+            }
+            return Promise.resolve(newEpisodePage2());
+        });
+
+        expect(service.load()).resolves.toThrow();
     });
 });

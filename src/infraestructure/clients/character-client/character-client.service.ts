@@ -6,7 +6,6 @@ import {LOGGER, LoggerCustomService} from "../../services/logger-custom.service"
 
 const nameMethod = 'findAll'
 
-
 @Injectable()
 export class CharacterClientService {
 
@@ -24,10 +23,10 @@ export class CharacterClientService {
         }
         try {
             const result = (await this.http.get<Pagination<Character>>(this.endpoint, {params}))
-            this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT)
+            this.logger.info(nameMethod, `page: ${page}`, LOGGER.END)
             return result.data
         } catch (e) {
-            this.logger.error(nameMethod, e.message, LOGGER.INIT)
+            this.logger.error(nameMethod, e.message, LOGGER.ERROR)
             throw e
         }
 
