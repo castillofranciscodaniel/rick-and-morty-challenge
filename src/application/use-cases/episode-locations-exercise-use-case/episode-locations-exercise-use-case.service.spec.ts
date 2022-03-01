@@ -6,6 +6,8 @@ import {LocationClientService} from "../../../infraestructure/clients/location-c
 import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
 import {newCharacterPage1, newCharacterPage2, newEpisodePage1, newEpisodePage2} from "../../../json-to-test";
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
+import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
+import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 
 describe('EpisodeLocationsExerciseUseCaseService', () => {
     let service: EpisodeLocationsExerciseUseCaseService;
@@ -13,17 +15,19 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
     let characterClientService: CharacterClientService;
     let locationClientService: LocationClientService;
     let episodeClientService: EpisodeClientService;
+    let dataInMemoryService: DataInMemoryService
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [EpisodeLocationsExerciseUseCaseService],
-            imports: [ClientsModule]
+            imports: [ClientsModule, DataInMemoryModule]
         }).compile();
 
         service = module.get<EpisodeLocationsExerciseUseCaseService>(EpisodeLocationsExerciseUseCaseService);
         characterClientService = module.get<CharacterClientService>(CharacterClientService);
         locationClientService = module.get<LocationClientService>(LocationClientService);
         episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
+        dataInMemoryService= module.get<DataInMemoryService>(DataInMemoryService)
 
     });
 
@@ -42,7 +46,7 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
             return Promise.resolve(newEpisodePage2())
         });
 
-
+        await dataInMemoryService.load()
         expect(await service.handler()).toMatchObject(matchResponse())
     });
 });
