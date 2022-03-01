@@ -67,7 +67,7 @@ describe('ChallengeResponseController', () => {
             return Promise.resolve(newEpisodePage2());
         });
 
-        const response = await request(app.getHttpServer()).get("/challengeResult");
+        const response = await request(app.getHttpServer()).get("");
 
         expect(response.body[0]).toMatchObject(newExerciseCResultCharCounter());
         expect(response.body).toHaveLength(2);
@@ -96,7 +96,7 @@ describe('ChallengeResponseController', () => {
             return Promise.resolve(newEpisodePage2());
         });
 
-        const response = await request(app.getHttpServer()).get("/challengeResult");
+        const response = await request(app.getHttpServer()).get("");
 
         expect(response.statusCode).toBe(500);
 
