@@ -41,6 +41,7 @@ export class EpisodeLocationsExerciseUseCaseService {
                     .includes(character.id))
                     .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.origin.name));
 
+                // to serialize array because of locations is a Set
                 episodeLocation.locations = [...episodeLocation.locations];
 
                 return episodeLocation;
