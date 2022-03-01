@@ -18,6 +18,7 @@ import {
 import {
     EpisodeLocationsExerciseUseCaseService
 } from "../../application/use-cases/episode-locations-exercise-use-case/episode-locations-exercise-use-case.service";
+import {DataInMemoryService} from "../../infraestructure/services/data-in-memory/data-in-memory.service";
 
 @Controller({
     path: "/",
@@ -26,14 +27,17 @@ import {
 export class ChallengeResponseController {
 
     constructor(
+        private readonly dataInMemoryService: DataInMemoryService,
         private readonly counterExerciseUseCaseService: CounterExerciseUseCaseService,
         private readonly episodeLocationsExerciseUseCaseService: EpisodeLocationsExerciseUseCaseService
     ) {
     }
 
     @Get('/challengeResult')
-    handler(): Promise<ExerciseResult<CountResult | EpisodeLocationResult>[]> {
+    async handler(): Promise<ExerciseResult<CountResult | EpisodeLocationResult>[]> {
         const startTime = new Date().getTime();
+
+        await this.dataInMemoryService.load()
 
         return Promise.all<ExerciseResult<CountResult | EpisodeLocationResult>>(
             [
