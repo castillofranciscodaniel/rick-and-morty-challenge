@@ -77,4 +77,95 @@ describe('DataInMemoryService', () => {
 
         expect(service.load()).resolves.toThrow();
     });
+
+    it('should be throw if you want to set characters', () => {
+        expect(() => service.characters = []).toThrow(new Error('can not not set characters'));
+    });
+
+    it('should be throw if you want to set locations', () => {
+        expect(() => service.locations = []).toThrow(new Error('can not not set locations'));
+    });
+
+    it('should be throw if you want to set episodes', () => {
+        expect(() => service.episodes = []).toThrow(new Error('can not not set episodes'));
+    });
+
+    it('should be return characters', async () => {
+        jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newLocationPage1());
+            }
+            return Promise.resolve(newLocationPage2());
+        });
+
+        jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newCharacterPage1());
+            }
+            return Promise.resolve(newCharacterPage2());
+        });
+
+        jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newEpisodePage1());
+            }
+            return Promise.resolve(newEpisodePage2());
+        });
+
+        await service.load()
+
+        expect(service.characters).toMatchObject([...newCharacterPage1().results, ...newCharacterPage2().results]);
+    });
+
+    it('should be return locations', async () => {
+        jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newLocationPage1());
+            }
+            return Promise.resolve(newLocationPage2());
+        });
+
+        jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newCharacterPage1());
+            }
+            return Promise.resolve(newCharacterPage2());
+        });
+
+        jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newEpisodePage1());
+            }
+            return Promise.resolve(newEpisodePage2());
+        });
+        await expect(service.load()).resolves.not.toThrow();
+
+        expect(service.locations).toMatchObject([...newLocationPage1().results, ...newLocationPage2().results]);
+    });
+
+    it('should be return episodes', async () => {
+        jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newLocationPage1());
+            }
+            return Promise.resolve(newLocationPage2());
+        });
+
+        jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newCharacterPage1());
+            }
+            return Promise.resolve(newCharacterPage2());
+        });
+
+        jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newEpisodePage1());
+            }
+            return Promise.resolve(newEpisodePage2());
+        });
+        await expect(service.load()).resolves.not.toThrow();
+
+        expect(service.episodes).toMatchObject([...newEpisodePage1().results, ...newEpisodePage2().results]);
+    });
 });
