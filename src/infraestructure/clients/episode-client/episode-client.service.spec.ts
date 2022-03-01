@@ -10,7 +10,7 @@ describe('EpisodeClientService', () => {
   let service: EpisodeClientService;
   let httpService: HttpService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [EpisodeClientService],
       imports: [HttpModule]

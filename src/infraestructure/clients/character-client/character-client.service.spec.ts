@@ -10,7 +10,7 @@ describe('CharacterClientService', () => {
     let service: CharacterClientService;
     let httpService: HttpService
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [CharacterClientService],
             imports: [HttpModule]
