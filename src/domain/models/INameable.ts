@@ -1,3 +1,3 @@
-export interface ContTheLetterInName {
+export interface INameable {
     name: string
 }

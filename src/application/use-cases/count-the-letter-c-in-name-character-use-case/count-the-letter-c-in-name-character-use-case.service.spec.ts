@@ -16,6 +16,8 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../json-to-test";
+import {CountCharactersInINameableService} from "../util/count-characters/count-characters-in-i-nameable.service";
+import {UseCasesModule} from "../use-cases.module";
 
 describe('CountTheLetterCInNameCharacterUseCaseService', () => {
     let service: CountTheLetterCInNameCharacterUseCaseService;
@@ -23,17 +25,20 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
     let locationClientService: LocationClientService
     let characterClientService: CharacterClientService
     let dataInMemoryService: DataInMemoryService;
+    let countCharactersInINameableService: CountCharactersInINameableService
 
     beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [CountTheLetterCInNameCharacterUseCaseService],
-            imports: [ClientsModule, DataInMemoryModule]
+            imports: [ClientsModule, DataInMemoryModule, UseCasesModule]
         }).compile();
 
         episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
         locationClientService = module.get<LocationClientService>(LocationClientService);
         characterClientService = module.get<CharacterClientService>(CharacterClientService);
         dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService);
+        countCharactersInINameableService = module.get<CountCharactersInINameableService>(CountCharactersInINameableService);
+
         service = module.get<CountTheLetterCInNameCharacterUseCaseService>(CountTheLetterCInNameCharacterUseCaseService);
 
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {

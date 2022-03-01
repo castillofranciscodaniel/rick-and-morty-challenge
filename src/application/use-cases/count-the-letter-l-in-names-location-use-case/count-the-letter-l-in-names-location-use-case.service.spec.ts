@@ -14,6 +14,10 @@ import {
 } from "../../../json-to-test";
 import {EpisodeClientService} from "../../../infraestructure/clients/episode-client/episode-client.service";
 import {CharacterClientService} from "../../../infraestructure/clients/character-client/character-client.service";
+import {
+    CountCharactersInINameableService
+} from "../util/count-characters/count-characters-in-i-nameable.service";
+import {UseCasesModule} from "../use-cases.module";
 
 describe('CountTheLetterLInNamesLocationUseCaseService', () => {
     let service: CountTheLetterLInNamesLocationUseCaseService;
@@ -21,17 +25,20 @@ describe('CountTheLetterLInNamesLocationUseCaseService', () => {
     let locationClientService: LocationClientService
     let characterClientService: CharacterClientService
     let dataInMemoryService: DataInMemoryService;
+    let countCharactersInINameableService: CountCharactersInINameableService;
 
     beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [CountTheLetterLInNamesLocationUseCaseService],
-            imports: [ClientsModule, DataInMemoryModule]
+            imports: [ClientsModule, DataInMemoryModule, UseCasesModule]
         }).compile();
 
         episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
         locationClientService = module.get<LocationClientService>(LocationClientService);
         characterClientService = module.get<CharacterClientService>(CharacterClientService);
         dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService);
+        countCharactersInINameableService = module.get<CountCharactersInINameableService>(CountCharactersInINameableService);
+
         service = module.get<CountTheLetterLInNamesLocationUseCaseService>(CountTheLetterLInNamesLocationUseCaseService);
 
 

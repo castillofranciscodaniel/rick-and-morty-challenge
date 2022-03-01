@@ -3,6 +3,7 @@ import {Character} from "./domain/models/character";
 import {Episode} from "./domain/models/episode";
 import {Location} from "./domain/models/location";
 import {EpisodeLocationResult, ExerciseResult} from "./application/dto/count-result";
+import {INameable} from "./domain/models/INameable";
 
 export function newCharacterPage1(): Pagination<Character> {
     return {
@@ -77,7 +78,7 @@ export function newCharacterPage1(): Pagination<Character> {
     }
 }
 
-export function newCharacterPage2(): Pagination<Character> {
+export function newCharacterPage2(): Pagination<Character | INameable> {
     return {
         "info": {
             "count": 826,

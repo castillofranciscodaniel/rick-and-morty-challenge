@@ -1,4 +1,6 @@
-export class Character {
+import {INameable} from "./INameable";
+
+export class Character implements INameable{
     id: number;
     name: string;
     status: string;
