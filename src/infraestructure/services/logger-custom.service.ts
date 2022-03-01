@@ -42,16 +42,16 @@ export class LoggerCustomService extends Logger {
      * @param {*} [data] data asociada al log.
      * @memberof LoggerCustomService
      */
-     debug(method: string, message?: string, data?: any): void {
-        let logger = `: [${method}] `;
-        if (message !== null) {
-            logger += `-> ${message}`;
-        }
-        if (data !== null && data !== undefined) {
-            logger += ` -> data = ${JSON.stringify(data)}`;
-        }
-        super.debug(logger, this.nameClazz);
-    }
+    //  debug(method: string, message?: string, data?: any): void {
+    //     let logger = `: [${method}] `;
+    //     if (message !== null) {
+    //         logger += `-> ${message}`;
+    //     }
+    //     if (data !== null && data !== undefined) {
+    //         logger += ` -> data = ${JSON.stringify(data)}`;
+    //     }
+    //     super.debug(logger, this.nameClazz);
+    // }
 
     /**
      * Configuracion de Log de error custom para la aplicacion.
@@ -61,11 +61,11 @@ export class LoggerCustomService extends Logger {
      * @param {*} [trace] trace del error o excepcion.
      * @memberof LoggerCustomService
      */
-     errors(method: string, message?: any, trace?: any): void {
-        super.error(
-            `[${method}] -> ${LOGGER.ERROR} -> ${JSON.stringify(message)}`,
-            `${trace}`,
-            this.nameClazz,
-        );
-    }
+     // errors(method: string, message?: any, trace?: any): void {
+     //    super.error(
+     //        `[${method}] -> ${LOGGER.ERROR} -> ${JSON.stringify(message)}`,
+     //        `${trace}`,
+     //        this.nameClazz,
+     //    );
+    // }
 }
