@@ -8,7 +8,6 @@ import {
 import {
     CountTheLetterEInNamesEpisodeUseCaseService
 } from "./count-the-letter-e-in-names-episode-use-case/count-the-letter-e-in-names-episode-use-case.service";
-import {ClientsModule} from "../../infraestructure/clients/clients.module";
 import {CounterExerciseUseCaseService} from "./counter-exercise-use-case/counter-exercise-use-case.service";
 import {
     EpisodeLocationsExerciseUseCaseService
@@ -31,7 +30,6 @@ import {DataInMemoryModule} from "../../infraestructure/services/data-in-memory/
         EpisodeLocationsExerciseUseCaseService
     ],
     imports: [
-        ClientsModule,
         DataInMemoryModule
     ]
 })
