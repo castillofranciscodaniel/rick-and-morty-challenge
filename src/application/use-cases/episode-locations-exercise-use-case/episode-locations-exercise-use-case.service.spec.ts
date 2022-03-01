@@ -5,6 +5,7 @@ import {CharacterClientService} from "../../../infraestructure/clients/character
 import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
 import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
 import {
+    matchResponse,
     newCharacterPage1,
     newCharacterPage2,
     newEpisodePage1,
@@ -65,58 +66,3 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
         expect(await service.handler(new Date())).toMatchObject(matchResponse())
     });
 });
-
-function matchResponse(): ExerciseResult<EpisodeLocationResult> {
-    return {
-        "exercise_name": "Episode locations",
-        "in_time": true,
-        "results": [
-            {
-                "name": "Pilot",
-                "episode": "S01E01",
-                "locations": [
-                    "Citadel of Ricks"
-                ]
-            },
-            {
-                "name": "Lawnmower Dog",
-                "episode": "S01E02",
-                "locations": [
-                    "Citadel of Ricks"
-                ]
-            },
-            {
-                "name": "Anatomy Park",
-                "episode": "S01E03",
-                "locations": [
-                    "Citadel of Ricks"
-                ]
-            },
-            {
-                "name": "The Wedding Squanchers",
-                "episode": "S02E10",
-                "locations": [
-                    "Citadel of Ricks",
-                    "Earth (Replacement Dimension)",
-                    "Immortality Field Resort"
-                ]
-            },
-            {
-                "name": "The Rickshank Rickdemption",
-                "episode": "S03E01",
-                "locations": [
-                    "Citadel of Ricks",
-                    "Earth (Replacement Dimension)"
-                ]
-            },
-            {
-                "name": "Rickmancing the Stone",
-                "episode": "S03E02",
-                "locations": [
-                    "Citadel of Ricks",
-                    "Earth (Replacement Dimension)"
-                ]
-            }
-        ]
-    }
-}

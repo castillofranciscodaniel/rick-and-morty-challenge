@@ -2,6 +2,7 @@ import {Pagination} from "./infraestructure/dto/pagination";
 import {Character} from "./domain/models/character";
 import {Episode} from "./domain/models/episode";
 import {Location} from "./domain/models/location";
+import {EpisodeLocationResult, ExerciseResult} from "./application/dto/count-result";
 
 export function newCharacterPage1(): Pagination<Character> {
     return {
@@ -622,6 +623,62 @@ export function newLocationPage2(): Pagination<Location> {
                 ],
                 "url": "https://rickandmortyapi.com/api/location/23",
                 "created": "2017-11-18T20:58:15.178Z"
+            }
+        ]
+    }
+}
+
+
+export function matchResponse(): ExerciseResult<EpisodeLocationResult> {
+    return {
+        "exercise_name": "Episode locations",
+        "in_time": true,
+        "results": [
+            {
+                "name": "Pilot",
+                "episode": "S01E01",
+                "locations": [
+                    "Citadel of Ricks"
+                ]
+            },
+            {
+                "name": "Lawnmower Dog",
+                "episode": "S01E02",
+                "locations": [
+                    "Citadel of Ricks"
+                ]
+            },
+            {
+                "name": "Anatomy Park",
+                "episode": "S01E03",
+                "locations": [
+                    "Citadel of Ricks"
+                ]
+            },
+            {
+                "name": "The Wedding Squanchers",
+                "episode": "S02E10",
+                "locations": [
+                    "Citadel of Ricks",
+                    "Earth (Replacement Dimension)",
+                    "Immortality Field Resort"
+                ]
+            },
+            {
+                "name": "The Rickshank Rickdemption",
+                "episode": "S03E01",
+                "locations": [
+                    "Citadel of Ricks",
+                    "Earth (Replacement Dimension)"
+                ]
+            },
+            {
+                "name": "Rickmancing the Stone",
+                "episode": "S03E02",
+                "locations": [
+                    "Citadel of Ricks",
+                    "Earth (Replacement Dimension)"
+                ]
             }
         ]
     }
