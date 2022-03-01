@@ -5,11 +5,21 @@ import {LocationClientService} from "../../../infraestructure/clients/location-c
 import {ClientsModule} from "../../../infraestructure/clients/clients.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
-import {newLocationPage1, newLocationPage2} from "../../../json-to-test";
+import {
+    newCharacterPage1,
+    newCharacterPage2,
+    newEpisodePage1, newEpisodePage2,
+    newLocationPage1,
+    newLocationPage2
+} from "../../../json-to-test";
+import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
+import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
 
 describe('CountTheLetterLInNamesLocationUseCaseService', () => {
     let service: CountTheLetterLInNamesLocationUseCaseService;
-    let locationClientService: LocationClientService;
+    let episodeClientService: EpisodeClientService;
+    let locationClientService: LocationClientService
+    let characterClientService: CharacterClientService
     let dataInMemoryService: DataInMemoryService;
 
     beforeAll(async () => {
@@ -18,9 +28,26 @@ describe('CountTheLetterLInNamesLocationUseCaseService', () => {
             imports: [ClientsModule, DataInMemoryModule]
         }).compile();
 
+        episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
         locationClientService = module.get<LocationClientService>(LocationClientService);
+        characterClientService = module.get<CharacterClientService>(CharacterClientService);
         dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService);
         service = module.get<CountTheLetterLInNamesLocationUseCaseService>(CountTheLetterLInNamesLocationUseCaseService);
+
+
+        jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newEpisodePage1())
+            }
+            return Promise.resolve(newEpisodePage2())
+        });
+
+        jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newCharacterPage1())
+            }
+            return Promise.resolve(newCharacterPage2())
+        });
 
     });
 

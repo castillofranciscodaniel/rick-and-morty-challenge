@@ -4,7 +4,13 @@ import {ClientsModule} from "../../../infraestructure/clients/clients.module";
 import {CharacterClientService} from "../../../infraestructure/clients/character-client.service";
 import {LocationClientService} from "../../../infraestructure/clients/location-client.service";
 import {EpisodeClientService} from "../../../infraestructure/clients/episode-client.service";
-import {newCharacterPage1, newCharacterPage2, newEpisodePage1, newEpisodePage2} from "../../../json-to-test";
+import {
+    newCharacterPage1,
+    newCharacterPage2,
+    newEpisodePage1,
+    newEpisodePage2,
+    newLocationPage1, newLocationPage2
+} from "../../../json-to-test";
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
@@ -29,6 +35,17 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
         episodeClientService = module.get<EpisodeClientService>(EpisodeClientService);
         dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService)
 
+        jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
+            if (page === 1) {
+                return Promise.resolve(newLocationPage1())
+            }
+            return Promise.resolve(newLocationPage2())
+        });
+
+    });
+
+    it('should be return episode location exercise result', async () => {
+
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
                 return Promise.resolve(newCharacterPage1())
@@ -44,10 +61,6 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
         });
 
         await dataInMemoryService.load()
-
-    });
-
-    it('should be return episode location exercise result', async () => {
 
         expect(await service.handler()).toMatchObject(matchResponse())
     });
