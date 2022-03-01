@@ -39,7 +39,7 @@ export class EpisodeLocationsExerciseUseCaseService {
 
                 this.dataInMemoryService.characters.filter(character => ids
                     .includes(character.id))
-                    .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.location.name));
+                    .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.origin.name));
 
                 episodeLocation.locations = [...episodeLocation.locations];
 

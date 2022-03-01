@@ -5,7 +5,7 @@ import {CharacterClientService} from "../../../infrastructure/clients/character-
 import {LocationClientService} from "../../../infrastructure/clients/location-client/location-client.service";
 import {EpisodeClientService} from "../../../infrastructure/clients/episode-client/episode-client.service";
 import {
-    matchResponse,
+    matchResponseEpisodeLocation,
     newCharacterPage1,
     newCharacterPage2,
     newEpisodePage1,
@@ -65,6 +65,6 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
 
         await dataInMemoryService.load()
 
-        expect(service.handler(new Date())).toMatchObject(matchResponse())
+        expect(service.handler(new Date())).toMatchObject(matchResponseEpisodeLocation())
     });
 });
