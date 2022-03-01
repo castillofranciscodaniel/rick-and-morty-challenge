@@ -29,19 +29,25 @@ export class ChallengeResponseController {
 
     @Get('/challengeResult')
     async handler(): Promise<ExerciseResult<CountResult | EpisodeLocationResult>[]> {
+        this.logger.info(nameMethod, '', LOGGER.INIT)
+
         const startTime = new Date();
 
         this.logger.info(nameMethod, '', LOGGER.INIT)
 
-        await this.dataInMemoryService.load()
+        try {
+            await this.dataInMemoryService.load()
+        } catch (e) {
+            this.logger.error(nameMethod, e.message, LOGGER.ERROR)
+            throw e
+        }
 
+        this.logger.info(nameMethod, ``, LOGGER.END)
         return Promise.all<ExerciseResult<CountResult | EpisodeLocationResult>>(
             [
                 this.counterExerciseUseCaseService.handler(startTime),
                 this.episodeLocationsExerciseUseCaseService.handler(startTime)
             ]
         )
-
     }
-
 }
