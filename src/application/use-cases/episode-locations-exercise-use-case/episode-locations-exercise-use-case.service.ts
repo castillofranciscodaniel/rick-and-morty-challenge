@@ -16,6 +16,7 @@ import {Character} from "../../../domain/models/character";
 import {Pagination} from "../../../infraestructure/dto/pagination";
 import {Location} from "../../../domain/models/location";
 import {Episode} from "../../../domain/models/episode";
+import {identity} from "rxjs";
 
 @Injectable()
 export class EpisodeLocationsExerciseUseCaseService {
@@ -36,45 +37,54 @@ export class EpisodeLocationsExerciseUseCaseService {
         const startTime = new Date().getTime();
 
 
+        const data = await Promise.all([this.findAllCharacters(), this.findAllEpisodes()])
+        const [characters, episodes] = data
+
+        const episodeLocations: EpisodeLocationResult[] = episodes.map(episodes => {
+                const episodeLocation: EpisodeLocationResult = {
+                    name: episodes.name,
+                    episode: episodes.episode,
+                    locations: new Set<string>()
+                };
+
+                const ids = episodes.characters.map(linkCharacters => {
+                    const subsOfLink = linkCharacters.split('/');
+                    return +(subsOfLink[subsOfLink.length - 1]);
+                });
+
+                characters.filter(character => ids
+                    .includes(character.id))
+                    .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.location.name));
+                episodeLocation.locations = [...episodeLocation.locations]
+
+                return episodeLocation;
+            }
+        )
+
+
         const endTime = new Date().getTime();
         const totalTimeMilliseconds = (endTime - startTime)
         const seconds = Math.trunc(totalTimeMilliseconds / 1000)
         const rest = totalTimeMilliseconds % 1000
 
-        return {
+        const exerciseResult: ExerciseResult<EpisodeLocationResult> = {
             exercise_name: this.exercise_name,
             time: `${seconds}s ${rest}ms`,
             in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInMilliseconds,
-            results: []
-        } as ExerciseResult<EpisodeLocationResult>
-    }
-
-    private async findAllLocation(): Promise<Location[]> {
-
-        const locations: Location[] = []
-        const requests: Promise<Pagination<Location>>[] = [];
-        const firstPage = await this.locationClientService.findAll(1)
-        locations.concat(firstPage.results)
-
-        for (let i = 2; i <= firstPage.info.pages; i++) {
-            requests.push(this.locationClientService.findAll(i))
+            results: episodeLocations
         }
 
-        await Promise.all(requests).then(thenResults => {
-            thenResults.map(pag => {
-                locations.concat(pag.results)
-            })
-        })
+        return exerciseResult
 
-        return locations
     }
+
 
     private async findAllCharacters(): Promise<Character[]> {
 
-        const characters: Character[] = []
+        let characters: Character[] = []
         const requests: Promise<Pagination<Character>>[] = [];
         const firstPage = await this.characterClientService.findAll(1)
-        characters.concat(firstPage.results)
+        characters = characters.concat(firstPage.results)
 
         for (let i = 2; i <= firstPage.info.pages; i++) {
             requests.push(this.characterClientService.findAll(i))
@@ -82,7 +92,7 @@ export class EpisodeLocationsExerciseUseCaseService {
 
         await Promise.all(requests).then(thenResults => {
             thenResults.map(pag => {
-                characters.concat(pag.results)
+                characters = characters.concat(pag.results)
             })
         })
 
@@ -91,10 +101,10 @@ export class EpisodeLocationsExerciseUseCaseService {
 
     private async findAllEpisodes(): Promise<Episode[]> {
 
-        const episodes: Episode[] = []
+        let episodes: Episode[] = []
         const requests: Promise<Pagination<Episode>>[] = [];
         const firstPage = await this.episodeClientService.findAll(1)
-        episodes.concat(firstPage.results)
+        episodes = episodes.concat(firstPage.results)
 
         for (let i = 2; i <= firstPage.info.pages; i++) {
             requests.push(this.episodeClientService.findAll(i))
@@ -102,7 +112,7 @@ export class EpisodeLocationsExerciseUseCaseService {
 
         await Promise.all(requests).then(thenResults => {
             thenResults.map(pag => {
-                episodes.concat(pag.results)
+                episodes = episodes.concat(pag.results)
             })
         })
 
