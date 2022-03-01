@@ -9,7 +9,7 @@ const nameMethod = 'findAll'
 @Injectable()
 export class CharacterClientService {
 
-    private endpoint = "https://rickandmortyapi.com/api/character"
+    private endpoint = process.env.RICK_AND_MORTY_API + 'character';
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(CharacterClientService.name);
 
