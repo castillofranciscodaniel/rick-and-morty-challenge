@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
-import {Pagination} from "../dto/pagination";
-import {Location} from "../../domain/models/location";
+import {Pagination} from "../../dto/pagination";
+import {Location} from "../../../domain/models/location";
 
 @Injectable()
 export class LocationClientService {
