@@ -79,7 +79,7 @@ export class DataInMemoryService {
         }
 
         const thenResults = await Promise.all(requests)
-        thenResults.map(pag => {
+        thenResults.forEach(pag => {
             characters = characters.concat(pag.results);
         })
 
@@ -98,7 +98,7 @@ export class DataInMemoryService {
         }
 
         const thenResults = await Promise.all(requests)
-        thenResults.map(pag => {
+        thenResults.forEach(pag => {
             episodes = episodes.concat(pag.results);
         })
 
@@ -117,7 +117,7 @@ export class DataInMemoryService {
         }
 
         const thenResults = await Promise.all(requests)
-        thenResults.map(pag => {
+        thenResults.forEach(pag => {
             locations = locations.concat(pag.results);
         })
 
