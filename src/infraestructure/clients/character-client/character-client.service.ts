@@ -17,17 +17,17 @@ export class CharacterClientService {
     }
 
     async findAll(page: number): Promise<Pagination<Character>> {
-        this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT)
+        this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT);
         const params = {
             page: page
         }
         try {
-            const result = (await this.http.get<Pagination<Character>>(this.endpoint, {params}))
-            this.logger.info(nameMethod, `page: ${page}`, LOGGER.END)
-            return result.data
+            const result = (await this.http.get<Pagination<Character>>(this.endpoint, {params}));
+            this.logger.info(nameMethod, `page: ${page}`, LOGGER.END);
+            return result.data;
         } catch (e) {
-            this.logger.error(nameMethod, e.message, LOGGER.ERROR)
-            throw e
+            this.logger.error(nameMethod, e.message, LOGGER.ERROR);
+            throw e;
         }
 
     }

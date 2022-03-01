@@ -9,8 +9,8 @@ const nameMethod = 'handler'
 @Injectable()
 export class CountTheLetterLInNamesLocationUseCaseService {
 
-    private letter = 'l'
-    private resource = 'location'
+    private letter = 'l';
+    private resource = 'location';
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(CountTheLetterLInNamesLocationUseCaseService.name);
 
@@ -19,16 +19,16 @@ export class CountTheLetterLInNamesLocationUseCaseService {
 
     handler(): CountResult {
 
-        this.logger.info(nameMethod, ``, LOGGER.INIT)
+        this.logger.info(nameMethod, ``, LOGGER.INIT);
 
         const count = this.countCharactersService.countResultProcess(this.letter, this.dataInMemoryService.locations);
-        this.logger.info(nameMethod, `count: ${count}`, LOGGER.END)
+        this.logger.info(nameMethod, `count: ${count}`, LOGGER.END);
 
         return {
             count: this.countCharactersService.countResultProcess(this.letter, this.dataInMemoryService.locations),
             char: this.letter,
             resource: this.resource,
-        }
+        } as CountResult;
     }
 
 

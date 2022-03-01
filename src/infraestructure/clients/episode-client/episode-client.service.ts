@@ -16,20 +16,20 @@ export class EpisodeClientService {
     }
 
     async findAll(page): Promise<Pagination<Episode>> {
-        this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT)
+        this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT);
 
         const params = {
             page: page
-        }
+        };
 
         try {
-            const result = await this.http.get<Pagination<Episode>>(this.endpoint, {params})
-            this.logger.info(nameMethod, `page: ${page}`, LOGGER.END)
-            return result.data
+            const result = await this.http.get<Pagination<Episode>>(this.endpoint, {params});
+            this.logger.info(nameMethod, `page: ${page}`, LOGGER.END);
+            return result.data;
 
         } catch (e) {
-            this.logger.error(nameMethod, e.message, LOGGER.ERROR)
-            throw e
+            this.logger.error(nameMethod, e.message, LOGGER.ERROR);
+            throw e;
         }
 
     }

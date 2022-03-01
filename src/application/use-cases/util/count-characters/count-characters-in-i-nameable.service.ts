@@ -11,18 +11,18 @@ export class CountCharactersInINameableService {
 
 
     countResultProcess(letter: string, contTheLetters: INameable[]): number {
-        this.logger.info(nameMethod, ``, LOGGER.INIT)
+        this.logger.info(nameMethod, ``, LOGGER.INIT);
 
         let count = 0;
         contTheLetters.map(character => {
             for (let i = 0; i < character.name.length; i++) {
                 if (character.name.toLowerCase().charAt(i) === letter) {
-                    count++
+                    count++;
                 }
             }
         })
 
-        this.logger.info(nameMethod, `count: ${count}`, LOGGER.END)
+        this.logger.info(nameMethod, `count: ${count}`, LOGGER.END);
         return count;
     }
 

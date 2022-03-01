@@ -13,9 +13,9 @@ const nameMethod = 'load'
 @Injectable()
 export class DataInMemoryService {
 
-    private _characters: Character[]
-    private _locations: Location[]
-    private _episodes: Episode[]
+    private _characters: Character[];
+    private _locations: Location[];
+    private _episodes: Episode[];
 
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(DataInMemoryService.name);
@@ -25,6 +25,18 @@ export class DataInMemoryService {
         private readonly episodeClientService: EpisodeClientService,
         private readonly locationClientService: LocationClientService
     ) {
+    }
+
+    set characters(value: Character[]) {
+        throw new Error('can not not set characters');
+    }
+
+    set locations(value: Location[]) {
+        throw new Error('can not not set locations');
+    }
+
+    set episodes(value: Episode[]) {
+        throw new Error('can not not set episodes');
     }
 
     get characters(): Character[] {
@@ -40,7 +52,7 @@ export class DataInMemoryService {
     }
 
     async load(): Promise<void> {
-        this.logger.info(nameMethod, 'loading...', LOGGER.INIT)
+        this.logger.info(nameMethod, 'loading...', LOGGER.INIT);
 
         try {
             const result = await Promise.all([this.findAllCharacters(), this.findAllEpisodes(), this.findAllLocation()]);

@@ -6,7 +6,8 @@ import {EpisodeClientService} from "../../../infraestructure/clients/episode-cli
 import {DataInMemoryModule} from "../../../infraestructure/services/data-in-memory/data-in-memory.module";
 import {DataInMemoryService} from "../../../infraestructure/services/data-in-memory/data-in-memory.service";
 import {
-    newCharacterPage1, newCharacterPage2,
+    newCharacterPage1,
+    newCharacterPage2,
     newEpisodePage1,
     newEpisodePage2,
     newLocationPage1,

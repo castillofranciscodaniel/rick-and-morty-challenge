@@ -4,7 +4,8 @@ import {ClientsModule} from "../../clients/clients.module";
 import {
     newCharacterPage1,
     newCharacterPage2,
-    newEpisodePage1, newEpisodePage2,
+    newEpisodePage1,
+    newEpisodePage2,
     newLocationPage1,
     newLocationPage2
 } from "../../../json-to-test";
@@ -14,9 +15,9 @@ import {EpisodeClientService} from "../../clients/episode-client/episode-client.
 
 describe('DataInMemoryService', () => {
     let service: DataInMemoryService;
-    let locationClientService: LocationClientService
-    let characterClientService: CharacterClientService
-    let episodeClientService: EpisodeClientService
+    let locationClientService: LocationClientService;
+    let characterClientService: CharacterClientService;
+    let episodeClientService: EpisodeClientService;
 
     beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -34,16 +35,16 @@ describe('DataInMemoryService', () => {
     it('should be not throw', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newLocationPage1())
+                return Promise.resolve(newLocationPage1());
             }
-            return Promise.resolve(newLocationPage2())
+            return Promise.resolve(newLocationPage2());
         });
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newCharacterPage1())
+                return Promise.resolve(newCharacterPage1());
             }
-            return Promise.resolve(newCharacterPage2())
+            return Promise.resolve(newCharacterPage2());
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
@@ -57,14 +58,14 @@ describe('DataInMemoryService', () => {
 
     it('should be throw', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation(() => {
-           throw new Error('error 400')
+            throw new Error('error 400');
         });
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newCharacterPage1())
+                return Promise.resolve(newCharacterPage1());
             }
-            return Promise.resolve(newCharacterPage2())
+            return Promise.resolve(newCharacterPage2());
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {

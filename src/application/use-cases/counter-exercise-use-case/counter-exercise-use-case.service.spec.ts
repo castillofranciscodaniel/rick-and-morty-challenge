@@ -34,7 +34,7 @@ describe('CounterExerciseUseCaseService', () => {
         expect(service).toBeDefined();
     });
 
-    it('should be return an ExerciseResult',  () => {
+    it('should be return an ExerciseResult', () => {
 
         jest.spyOn(countTheLetterCInNameCharacterUseCaseService, 'handler').mockImplementation(() => {
             return newPageResultC();

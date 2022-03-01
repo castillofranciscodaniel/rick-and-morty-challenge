@@ -40,26 +40,27 @@ export class EpisodeLocationsExerciseUseCaseService {
                 this.dataInMemoryService.characters.filter(character => ids
                     .includes(character.id))
                     .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.location.name));
-                episodeLocation.locations = [...episodeLocation.locations]
+
+                episodeLocation.locations = [...episodeLocation.locations];
 
                 return episodeLocation;
             }
         )
 
         const endTime = new Date().getTime();
-        const totalTimeMilliseconds = (endTime - startTime.getTime())
-        const seconds = Math.trunc(totalTimeMilliseconds / 1000)
-        const rest = totalTimeMilliseconds % 1000
+        const totalTimeMilliseconds = (endTime - startTime.getTime());
+        const seconds = Math.trunc(totalTimeMilliseconds / 1000);
+        const rest = totalTimeMilliseconds % 1000;
 
         const exerciseResult: ExerciseResult<EpisodeLocationResult> = {
             exercise_name: this.exercise_name,
             time: `${seconds}s ${rest}ms`,
             in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInMilliseconds,
             results: episodeLocations
-        }
+        };
 
-        this.logger.info(nameMethod, ``, LOGGER.END)
-        return exerciseResult
+        this.logger.info(nameMethod, ``, LOGGER.END);
+        return exerciseResult;
 
     }
 

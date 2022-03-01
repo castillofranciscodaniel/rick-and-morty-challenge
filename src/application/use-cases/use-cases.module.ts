@@ -13,7 +13,7 @@ import {
     EpisodeLocationsExerciseUseCaseService
 } from './episode-locations-exercise-use-case/episode-locations-exercise-use-case.service';
 import {DataInMemoryModule} from "../../infraestructure/services/data-in-memory/data-in-memory.module";
-import { CountCharactersInINameableService } from './util/count-characters/count-characters-in-i-nameable.service';
+import {CountCharactersInINameableService} from './util/count-characters/count-characters-in-i-nameable.service';
 
 @Module({
     providers: [

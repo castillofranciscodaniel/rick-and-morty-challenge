@@ -43,19 +43,19 @@ export class CounterExerciseUseCaseService {
 
 
         const endTime = new Date().getTime();
-        const totalTimeMilliseconds = (endTime - startTime.getTime())
-        const seconds = Math.trunc(totalTimeMilliseconds / 1000)
-        const rest = totalTimeMilliseconds % 1000
+        const totalTimeMilliseconds = (endTime - startTime.getTime());
+        const seconds = Math.trunc(totalTimeMilliseconds / 1000);
+        const rest = totalTimeMilliseconds % 1000;
 
 
-        this.logger.info(nameMethod, ``, LOGGER.END)
+        this.logger.info(nameMethod, ``, LOGGER.END);
 
         return {
             exercise_name: this.exercise_name,
             time: `${seconds}s ${rest}ms`,
             in_time: totalTimeMilliseconds <= this.maxTimeToExecuteInMilliseconds,
             results: resultAll
-        } as ExerciseResult<CountResult>
+        } as ExerciseResult<CountResult>;
     }
 
 }

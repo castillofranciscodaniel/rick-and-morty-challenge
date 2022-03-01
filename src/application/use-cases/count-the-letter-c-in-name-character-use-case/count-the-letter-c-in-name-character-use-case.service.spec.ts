@@ -41,16 +41,16 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
 
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newLocationPage1())
+                return Promise.resolve(newLocationPage1());
             }
-            return Promise.resolve(newLocationPage2())
+            return Promise.resolve(newLocationPage2());
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newEpisodePage1())
+                return Promise.resolve(newEpisodePage1());
             }
-            return Promise.resolve(newEpisodePage2())
+            return Promise.resolve(newEpisodePage2());
         });
 
     });
@@ -61,7 +61,7 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
             count: 4,
             char: 'c',
             resource: 'character',
-        }
+        };
 
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
@@ -71,7 +71,7 @@ describe('CountTheLetterCInNameCharacterUseCaseService', () => {
             return Promise.resolve(newCharacterPage2())
         });
 
-        await dataInMemoryService.load()
+        await dataInMemoryService.load();
 
 
         expect(service.handler()).toStrictEqual(countResult);

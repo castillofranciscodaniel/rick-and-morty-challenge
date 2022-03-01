@@ -21,14 +21,14 @@ export class LocationClientService {
 
         const params = {
             page: page
-        }
+        };
 
         try {
-            const result = await this.http.get<Pagination<Location>>(this.endpoint, {params})
-            return result.data
+            const result = await this.http.get<Pagination<Location>>(this.endpoint, {params});
+            return result.data;
         } catch (e) {
-            this.logger.error(nameMethod, e.message, LOGGER.ERROR)
-            throw e
+            this.logger.error(nameMethod, e.message, LOGGER.ERROR);
+            throw e;
         }
     }
 }
