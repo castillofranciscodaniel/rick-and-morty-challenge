@@ -34,11 +34,17 @@ export class DataInMemoryService {
         return this._episodes;
     }
 
-    async load() {
-        const result = await Promise.all([this.findAllCharacters(), this.findAllEpisodes(), this.findAllLocation()])
-        this._characters = result[0];
-        this._episodes = result[1];
-        this._locations = result[2];
+    async load(): Promise<boolean> {
+        try {
+            const result = await Promise.all([this.findAllCharacters(), this.findAllEpisodes(), this.findAllLocation()])
+            this._characters = result[0];
+            this._episodes = result[1];
+            this._locations = result[2];
+        } catch {
+            return Promise.resolve(false);
+        }
+
+        return Promise.resolve(true);
     }
 
     private async findAllCharacters(): Promise<Character[]> {

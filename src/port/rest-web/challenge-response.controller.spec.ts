@@ -1,9 +1,6 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {ChallengeResponseController} from './challenge-response.controller';
 import {CountResult, ExerciseResult} from "../../application/dto/count-result";
-import {
-    CounterExerciseUseCaseService
-} from "../../application/use-cases/counter-exercise-use-case/counter-exercise-use-case.service";
 import {UseCasesModule} from "../../application/use-cases/use-cases.module";
 import {AppModule} from "../../app.module";
 import {HttpModule, HttpService} from "nestjs-http-promise";
