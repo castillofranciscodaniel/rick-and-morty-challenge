@@ -3,7 +3,7 @@ import {CounterExerciseUseCaseService} from "./counter-exercise-use-case/counter
 import {
     EpisodeLocationsExerciseUseCaseService
 } from './episode-locations-exercise-use-case/episode-locations-exercise-use-case.service';
-import {DataInMemoryModule} from "../../infrastructure/services/data-in-memory/data-in-memory.module";
+import {AdaptersModule} from "../../infrastructure/adapters/adapters.module";
 
 @Module({
     providers: [
@@ -15,7 +15,7 @@ import {DataInMemoryModule} from "../../infrastructure/services/data-in-memory/d
         EpisodeLocationsExerciseUseCaseService,
     ],
     imports: [
-        DataInMemoryModule
+        AdaptersModule
     ]
 })
 export class UseCasesModule {

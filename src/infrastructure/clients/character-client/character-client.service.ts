@@ -2,12 +2,13 @@ import {Injectable} from '@nestjs/common';
 import {Character} from "../../../domain/models/character";
 import {Pagination} from "../../dto/pagination";
 import {HttpService} from "nestjs-http-promise";
-import {LOGGER, LoggerCustomService} from "../../services/logger-custom.service";
+import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
+import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'
 
 @Injectable()
-export class CharacterClientService {
+export class CharacterClientService implements ICharacterRepository {
 
     private endpoint = process.env.RICK_AND_MORTY_API + 'character';
 
@@ -18,11 +19,8 @@ export class CharacterClientService {
 
     async findAll(page: number): Promise<Pagination<Character>> {
         this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT);
-        const params = {
-            page: page
-        }
         try {
-            const result = (await this.http.get<Pagination<Character>>(this.endpoint, {params}));
+            const result = await this.http.get<Pagination<Character>>(this.endpoint, {params: {page: page}});
             this.logger.info(nameMethod, `page: ${page}`, LOGGER.END);
             return result.data;
         } catch (e) {

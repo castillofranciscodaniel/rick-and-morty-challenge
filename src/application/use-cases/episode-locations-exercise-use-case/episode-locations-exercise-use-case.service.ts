@@ -1,9 +1,10 @@
 import {Injectable} from '@nestjs/common';
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
-import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
-import {LOGGER, LoggerCustomService} from "../../../infrastructure/services/logger-custom.service";
+import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
+import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
+import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
 
-const nameMethod = 'handler'
+const NAME_METHOD = 'handler'
 
 @Injectable()
 export class EpisodeLocationsExerciseUseCaseService {
@@ -15,7 +16,8 @@ export class EpisodeLocationsExerciseUseCaseService {
 
 
     constructor(
-        private dataInMemoryService: DataInMemoryService,
+        private readonly characterRepository: ICharacterRepository,
+        private readonly episodeRepository: IEpisodeRepository
     ) {
         this.exercise_name = 'Episode locations';
         this.maxTimeToExecuteInMilliseconds = 3000
@@ -23,9 +25,9 @@ export class EpisodeLocationsExerciseUseCaseService {
 
     handler(startTime: Date): ExerciseResult<EpisodeLocationResult> {
 
-        this.logger.info(nameMethod, ``, LOGGER.INIT)
+        this.logger.info(NAME_METHOD, `startTime: ${startTime}`, LOGGER.INIT)
 
-        const episodeLocations: EpisodeLocationResult[] = this.dataInMemoryService.episodes.map(episodes => {
+        const episodeLocations: EpisodeLocationResult[] = this.episodeRepository.findAll().map(episodes => {
                 const episodeLocation: EpisodeLocationResult = {
                     name: episodes.name,
                     episode: episodes.episode,
@@ -37,10 +39,11 @@ export class EpisodeLocationsExerciseUseCaseService {
                     return +(subsOfLink[subsOfLink.length - 1]);
                 });
 
-                this.dataInMemoryService.characters.filter(character => ids
+                this.characterRepository.findAll().filter(character => ids
                     .includes(character.id))
-                    .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.location.name));
+                    .forEach(filterCharacters => ((episodeLocation.locations) as Set<string>).add(filterCharacters.origin.name));
 
+                // to serialize array because of locations is a Set
                 episodeLocation.locations = [...episodeLocation.locations];
 
                 return episodeLocation;
@@ -59,7 +62,7 @@ export class EpisodeLocationsExerciseUseCaseService {
             results: episodeLocations
         };
 
-        this.logger.info(nameMethod, ``, LOGGER.END);
+        this.logger.info(NAME_METHOD, `endTime: ${endTime}. Total time: ${seconds}s ${rest}ms`, LOGGER.END);
         return exerciseResult;
 
     }

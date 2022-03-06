@@ -2,12 +2,13 @@ import {Injectable} from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
 import {Pagination} from "../../dto/pagination";
 import {Location} from "../../../domain/models/location";
-import {LOGGER, LoggerCustomService} from "../../services/logger-custom.service";
+import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
+import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'
 
 @Injectable()
-export class LocationClientService {
+export class LocationClientService implements ILocationRepository {
     private endpoint = process.env.RICK_AND_MORTY_API + 'location'
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(LocationClientService.name);
@@ -19,12 +20,8 @@ export class LocationClientService {
 
         this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT)
 
-        const params = {
-            page: page
-        };
-
         try {
-            const result = await this.http.get<Pagination<Location>>(this.endpoint, {params});
+            const result = await this.http.get<Pagination<Location>>(this.endpoint, {params: {page: page}});
             return result.data;
         } catch (e) {
             this.logger.error(nameMethod, e.message, LOGGER.ERROR);

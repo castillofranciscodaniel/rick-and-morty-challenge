@@ -5,7 +5,7 @@ import {CharacterClientService} from "../../../infrastructure/clients/character-
 import {LocationClientService} from "../../../infrastructure/clients/location-client/location-client.service";
 import {EpisodeClientService} from "../../../infrastructure/clients/episode-client/episode-client.service";
 import {
-    matchResponse,
+    matchResponseEpisodeLocation,
     newCharacterPage1,
     newCharacterPage2,
     newEpisodePage1,
@@ -13,8 +13,8 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../../test/json-to-test";
-import {DataInMemoryModule} from "../../../infrastructure/services/data-in-memory/data-in-memory.module";
-import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
+import {DataInMemoryModule} from "../../../infrastructure/data-in-memory/data-in-memory.module";
+import {DataInMemoryService} from "../../../infrastructure/data-in-memory/data-in-memory.service";
 
 describe('EpisodeLocationsExerciseUseCaseService', () => {
     let service: EpisodeLocationsExerciseUseCaseService;
@@ -65,6 +65,6 @@ describe('EpisodeLocationsExerciseUseCaseService', () => {
 
         await dataInMemoryService.load()
 
-        expect(service.handler(new Date())).toMatchObject(matchResponse())
+        expect(service.handler(new Date())).toMatchObject(matchResponseEpisodeLocation())
     });
 });

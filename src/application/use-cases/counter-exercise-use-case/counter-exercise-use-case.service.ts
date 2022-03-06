@@ -1,12 +1,15 @@
 import {Injectable} from '@nestjs/common';
 import {CountResult, ExerciseResult} from "../../dto/count-result";
-import {LOGGER, LoggerCustomService} from "../../../infrastructure/services/logger-custom.service";
 import {INameable} from "../../../domain/models/INameable";
-import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
+import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
+import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
+import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
+import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
 
 const EXERCISE_NAME = 'Char counter'
 const NAME_METHOD = 'handler'
 const COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE = 'countOccurrencesLetterInNamesOfNameable'
+const COUNT_RESULT_PROCES = 'countResultProcess'
 const LETTER_C = 'c'
 const LETTER_L = 'l'
 const LETTER_E = 'e'
@@ -22,11 +25,14 @@ export class CounterExerciseUseCaseService {
 
 
     constructor(
-        private readonly dataInMemoryService: DataInMemoryService) {
+        private readonly characterRepository: ICharacterRepository,
+        private readonly locationRepository: ILocationRepository,
+        private readonly episodeRepository: IEpisodeRepository
+    ) {
     }
 
     handler(startTime: Date): ExerciseResult<CountResult> {
-        this.logger.info(NAME_METHOD, ``, LOGGER.INIT)
+        this.logger.info(NAME_METHOD, `startTime: ${startTime}`, LOGGER.INIT)
 
         const resultAll =
             [
@@ -36,13 +42,13 @@ export class CounterExerciseUseCaseService {
             ]
 
 
-        const endTime = new Date().getTime();
-        const totalTimeMilliseconds = (endTime - startTime.getTime());
+        const endTime = new Date();
+        const totalTimeMilliseconds = (endTime.getTime() - startTime.getTime());
         const seconds = Math.trunc(totalTimeMilliseconds / 1000);
         const rest = totalTimeMilliseconds % 1000;
 
 
-        this.logger.info(NAME_METHOD, ``, LOGGER.END);
+        this.logger.info(NAME_METHOD, `endTime: ${endTime}. Total time: ${seconds}s ${rest}ms`, LOGGER.END);
 
         return {
             exercise_name: EXERCISE_NAME,
@@ -53,10 +59,10 @@ export class CounterExerciseUseCaseService {
     }
 
     private countResultProcess(letter: string, contTheLetters: INameable[]): number {
-        this.logger.info(NAME_METHOD, ``, LOGGER.INIT);
+        this.logger.info(COUNT_RESULT_PROCES, ``, LOGGER.INIT);
 
         let count = 0;
-        contTheLetters.map(character => {
+        contTheLetters.forEach(character => {
             for (let i = 0; i < character.name.length; i++) {
                 if (character.name.toLowerCase().charAt(i) === letter) {
                     count++;
@@ -64,14 +70,14 @@ export class CounterExerciseUseCaseService {
             }
         })
 
-        this.logger.info(NAME_METHOD, `count: ${count}`, LOGGER.END);
+        this.logger.info(COUNT_RESULT_PROCES, `count: ${count}`, LOGGER.END);
         return count;
     }
 
     private countOccurrencesLetterInNamesOfNameable(letter: string, memoryKey: string, resource: string): CountResult {
         this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
 
-        const count = this.countResultProcess(letter, this.dataInMemoryService[memoryKey]);
+        const count = this.countResultProcess(letter, this.characterRepository[memoryKey]);
         this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
 
         return {

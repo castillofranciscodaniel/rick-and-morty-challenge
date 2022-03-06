@@ -2,12 +2,13 @@ import {Injectable} from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
 import {Pagination} from "../../dto/pagination";
 import {Episode} from "../../../domain/models/episode";
-import {LOGGER, LoggerCustomService} from "../../services/logger-custom.service";
+import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'
 
 @Injectable()
-export class EpisodeClientService {
+export class EpisodeClientService implements IEpisodeRepository {
     private endpoint = process.env.RICK_AND_MORTY_API + 'episode'
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(EpisodeClientService.name);
@@ -18,12 +19,8 @@ export class EpisodeClientService {
     async findAll(page): Promise<Pagination<Episode>> {
         this.logger.info(nameMethod, `page: ${page}`, LOGGER.INIT);
 
-        const params = {
-            page: page
-        };
-
         try {
-            const result = await this.http.get<Pagination<Episode>>(this.endpoint, {params});
+            const result = await this.http.get<Pagination<Episode>>(this.endpoint, {params: {page: page}});
             this.logger.info(nameMethod, `page: ${page}`, LOGGER.END);
             return result.data;
 

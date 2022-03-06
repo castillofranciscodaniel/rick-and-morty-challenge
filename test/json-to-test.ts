@@ -630,7 +630,7 @@ export function newLocationPage2(): Pagination<Location> {
 }
 
 
-export function matchResponse(): ExerciseResult<EpisodeLocationResult> {
+export function matchResponseEpisodeLocation(): ExerciseResult<EpisodeLocationResult> {
     return {
         "exercise_name": "Episode locations",
         "in_time": true,
@@ -639,45 +639,50 @@ export function matchResponse(): ExerciseResult<EpisodeLocationResult> {
                 "name": "Pilot",
                 "episode": "S01E01",
                 "locations": [
-                    "Citadel of Ricks"
+                    "Earth (C-137)",
+                    "unknown"
                 ]
             },
             {
                 "name": "Lawnmower Dog",
                 "episode": "S01E02",
                 "locations": [
-                    "Citadel of Ricks"
+                    "Earth (C-137)",
+                    "unknown"
                 ]
             },
             {
                 "name": "Anatomy Park",
                 "episode": "S01E03",
                 "locations": [
-                    "Citadel of Ricks"
+                    "Earth (C-137)",
+                    "unknown"
                 ]
             },
             {
                 "name": "The Wedding Squanchers",
                 "episode": "S02E10",
                 "locations": [
-                    "Citadel of Ricks",
+                    "Earth (C-137)",
+                    "unknown",
                     "Earth (Replacement Dimension)",
-                    "Immortality Field Resort"
                 ]
             },
             {
                 "name": "The Rickshank Rickdemption",
                 "episode": "S03E01",
                 "locations": [
-                    "Citadel of Ricks",
-                    "Earth (Replacement Dimension)"
+                    "Earth (C-137)",
+                    "unknown",
+                    "Earth (Replacement Dimension)",
                 ]
             },
             {
                 "name": "Rickmancing the Stone",
                 "episode": "S03E02",
                 "locations": [
-                    "Citadel of Ricks",
+                    "Earth (C-137)",
+                    "unknown",
                     "Earth (Replacement Dimension)"
                 ]
             }
