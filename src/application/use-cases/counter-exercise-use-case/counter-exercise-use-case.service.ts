@@ -1,8 +1,10 @@
 import {Injectable} from '@nestjs/common';
 import {CountResult, ExerciseResult} from "../../dto/count-result";
-import {LOGGER, LoggerCustomService} from "../../../infrastructure/services/logger-custom.service";
 import {INameable} from "../../../domain/models/INameable";
-import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
+import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
+import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
+import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
+import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
 
 const EXERCISE_NAME = 'Char counter'
 const NAME_METHOD = 'handler'
@@ -23,7 +25,10 @@ export class CounterExerciseUseCaseService {
 
 
     constructor(
-        private readonly dataInMemoryService: DataInMemoryService) {
+        private readonly characterRepository: ICharacterRepository,
+        private readonly locationRepository: ILocationRepository,
+        private readonly episodeRepository: IEpisodeRepository
+    ) {
     }
 
     handler(startTime: Date): ExerciseResult<CountResult> {
@@ -72,7 +77,7 @@ export class CounterExerciseUseCaseService {
     private countOccurrencesLetterInNamesOfNameable(letter: string, memoryKey: string, resource: string): CountResult {
         this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
 
-        const count = this.countResultProcess(letter, this.dataInMemoryService[memoryKey]);
+        const count = this.countResultProcess(letter, this.characterRepository[memoryKey]);
         this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
 
         return {

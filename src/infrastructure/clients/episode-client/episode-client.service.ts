@@ -2,12 +2,13 @@ import {Injectable} from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
 import {Pagination} from "../../dto/pagination";
 import {Episode} from "../../../domain/models/episode";
-import {LOGGER, LoggerCustomService} from "../../services/logger-custom.service";
+import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'
 
 @Injectable()
-export class EpisodeClientService {
+export class EpisodeClientService implements IEpisodeRepository {
     private endpoint = process.env.RICK_AND_MORTY_API + 'episode'
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(EpisodeClientService.name);

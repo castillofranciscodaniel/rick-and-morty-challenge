@@ -15,6 +15,12 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../test/json-to-test";
+import {LocationRepository} from "../../../dist/domain/adapters/locationRepository";
+import {CharacterRepository} from "../../../dist/domain/adapters/characterRepository";
+import {EpisodeRepository} from "../../../dist/domain/adapters/episodeRepository";
+import {IEpisodeRepository} from "../../domain/adapters/IEpisodeRepository";
+import {ILocationRepository} from "../../domain/adapters/ILocationRepository";
+import {ICharacterRepository} from "../../domain/adapters/ICharacterRepository";
 
 const request = require('supertest');
 
@@ -24,10 +30,9 @@ describe('ChallengeResponseController', () => {
     let app: INestApplication;
     let httpService: HttpService;
 
-
-    let locationClientService: LocationClientService
-    let characterClientService: CharacterClientService
-    let episodeClientService: EpisodeClientService
+    let episodeClientService: IEpisodeRepository
+    let locationClientService: ILocationRepository
+    let characterClientService: ICharacterRepository
 
     beforeAll(async () => {
         const testAppModule: TestingModule = await Test.createTestingModule({
@@ -38,9 +43,9 @@ describe('ChallengeResponseController', () => {
         httpService = testAppModule.get<HttpService>(HttpService);
 
 
-        episodeClientService = app.get<EpisodeClientService>(EpisodeClientService);
-        locationClientService = app.get<LocationClientService>(LocationClientService);
-        characterClientService = app.get<CharacterClientService>(CharacterClientService);
+        episodeClientService = app.get<IEpisodeRepository>(IEpisodeRepository);
+        locationClientService = app.get<ILocationRepository>(ILocationRepository);
+        characterClientService = app.get<ICharacterRepository>(ICharacterRepository);
 
         await app.init();
     });

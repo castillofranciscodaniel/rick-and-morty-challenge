@@ -2,12 +2,13 @@ import {Injectable} from '@nestjs/common';
 import {Character} from "../../../domain/models/character";
 import {Pagination} from "../../dto/pagination";
 import {HttpService} from "nestjs-http-promise";
-import {LOGGER, LoggerCustomService} from "../../services/logger-custom.service";
+import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
+import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'
 
 @Injectable()
-export class CharacterClientService {
+export class CharacterClientService implements ICharacterRepository {
 
     private endpoint = process.env.RICK_AND_MORTY_API + 'character';
 
