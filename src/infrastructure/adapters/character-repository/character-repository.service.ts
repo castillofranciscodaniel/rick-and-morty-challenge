@@ -1,9 +1,9 @@
 import {Injectable} from '@nestjs/common';
 import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
-import {CharacterRepository} from "../../../../dist/domain/adapters/characterRepository";
+import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
 
 @Injectable()
-export class CharacterRepositoryService implements CharacterRepository {
+export class CharacterRepositoryService implements ICharacterRepository {
 
     constructor(private readonly data: DataInMemoryService) {
     }

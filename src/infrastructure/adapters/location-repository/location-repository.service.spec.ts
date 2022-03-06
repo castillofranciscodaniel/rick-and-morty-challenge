@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LocationRepositoryService } from './location-repository.service';
 import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
 import {DataInMemoryModule} from "../../services/data-in-memory/data-in-memory.module";
+import {AdaptersModule} from "../adapters.module";
 
 describe('LocationRepositoryService', () => {
   let service: LocationRepositoryService;
@@ -9,7 +10,7 @@ describe('LocationRepositoryService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [DataInMemoryModule],
+      imports: [AdaptersModule,DataInMemoryModule],
       providers: [LocationRepositoryService],
     }).compile();
 

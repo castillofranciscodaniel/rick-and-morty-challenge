@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EpisodeRepositoryService } from './episode-repository.service';
 import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
+import {AdaptersModule} from "../adapters.module";
+import {DataInMemoryModule} from "../../services/data-in-memory/data-in-memory.module";
 
 describe('EpisodeRepositoryService', () => {
   let service: EpisodeRepositoryService;
@@ -8,6 +10,7 @@ describe('EpisodeRepositoryService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [AdaptersModule,DataInMemoryModule],
       providers: [EpisodeRepositoryService],
     }).compile();
 
