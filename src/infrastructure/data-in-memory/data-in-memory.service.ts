@@ -3,10 +3,10 @@ import {Character} from "../../domain/models/character";
 import {Location} from "../../domain/models/location";
 import {Episode} from "../../domain/models/episode";
 import {Pagination} from "../dto/pagination";
-import {ICharacterRepository} from "../../domain/adapters/ICharacterRepository";
-import {IEpisodeRepository} from "../../domain/adapters/IEpisodeRepository";
-import {ILocationRepository} from "../../domain/adapters/ILocationRepository"
 import {LOGGER, LoggerCustomService} from "../logger-custom.service";
+import {CharacterClientService} from "../clients/character-client/character-client.service";
+import {EpisodeClientService} from "../clients/episode-client/episode-client.service";
+import {LocationClientService} from "../clients/location-client/location-client.service";
 
 const nameMethod = 'load'
 
@@ -21,9 +21,9 @@ export class DataInMemoryService {
     private readonly logger: LoggerCustomService = new LoggerCustomService(DataInMemoryService.name);
 
     constructor(
-        private readonly characterClientService: ICharacterRepository,
-        private readonly episodeClientService: IEpisodeRepository,
-        private readonly locationClientService: ILocationRepository
+        private readonly characterClientService: CharacterClientService,
+        private readonly episodeClientService: EpisodeClientService,
+        private readonly locationClientService: LocationClientService
     ) {
     }
 
