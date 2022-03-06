@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import {CountResult, ExerciseResult} from "../../dto/count-result";
 import {INameable} from "../../../domain/models/INameable";
 import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
@@ -25,9 +25,9 @@ export class CounterExerciseUseCaseService {
 
 
     constructor(
-        private readonly characterRepository: ICharacterRepository,
-        private readonly locationRepository: ILocationRepository,
-        private readonly episodeRepository: IEpisodeRepository
+        @Inject(ICharacterRepository) private readonly characterRepository: ICharacterRepository,
+        @Inject(ILocationRepository) private readonly locationRepository: ILocationRepository,
+        @Inject(IEpisodeRepository) private readonly episodeRepository: IEpisodeRepository
     ) {
     }
 
@@ -36,9 +36,9 @@ export class CounterExerciseUseCaseService {
 
         const resultAll =
             [
-                this.countOccurrencesLetterInNamesOfNameable(LETTER_L, 'locations', RESOURCE_LOCATION),
-                this.countOccurrencesLetterInNamesOfNameable(LETTER_E, 'episodes', RESOURCE_EPISODE),
-                this.countOccurrencesLetterInNamesOfNameable(LETTER_C, 'characters', RESOURCE_CHARACTER),
+                this.countOccurrencesLetterInNamesOfNameable(LETTER_L, this.locationRepository.findAll(), RESOURCE_LOCATION),
+                this.countOccurrencesLetterInNamesOfNameable(LETTER_E, this.episodeRepository.findAll(), RESOURCE_EPISODE),
+                this.countOccurrencesLetterInNamesOfNameable(LETTER_C, this.characterRepository.findAll(), RESOURCE_CHARACTER),
             ]
 
 
@@ -58,6 +58,19 @@ export class CounterExerciseUseCaseService {
         } as ExerciseResult<CountResult>;
     }
 
+    private countOccurrencesLetterInNamesOfNameable(letter: string, nameable: INameable[], resource: string): CountResult {
+        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
+
+        const count = this.countResultProcess(letter, nameable);
+        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
+
+        return {
+            char: letter,
+            count: count,
+            resource: resource,
+        } as CountResult;
+    }
+
     private countResultProcess(letter: string, contTheLetters: INameable[]): number {
         this.logger.info(COUNT_RESULT_PROCES, ``, LOGGER.INIT);
 
@@ -72,19 +85,6 @@ export class CounterExerciseUseCaseService {
 
         this.logger.info(COUNT_RESULT_PROCES, `count: ${count}`, LOGGER.END);
         return count;
-    }
-
-    private countOccurrencesLetterInNamesOfNameable(letter: string, memoryKey: string, resource: string): CountResult {
-        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
-
-        const count = this.countResultProcess(letter, this.characterRepository[memoryKey]);
-        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
-
-        return {
-            char: letter,
-            count: count,
-            resource: resource,
-        } as CountResult;
     }
 
 }

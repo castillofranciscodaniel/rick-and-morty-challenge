@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
 import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
 import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
@@ -16,8 +16,8 @@ export class EpisodeLocationsExerciseUseCaseService {
 
 
     constructor(
-        private readonly characterRepository: ICharacterRepository,
-        private readonly episodeRepository: IEpisodeRepository
+        @Inject(ICharacterRepository) private readonly characterRepository: ICharacterRepository,
+        @Inject(IEpisodeRepository) private readonly episodeRepository: IEpisodeRepository
     ) {
         this.exercise_name = 'Episode locations';
         this.maxTimeToExecuteInMilliseconds = 3000

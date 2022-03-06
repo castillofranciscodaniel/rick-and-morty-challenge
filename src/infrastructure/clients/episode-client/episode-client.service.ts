@@ -8,7 +8,7 @@ import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 const nameMethod = 'findAll'
 
 @Injectable()
-export class EpisodeClientService implements IEpisodeRepository {
+export class EpisodeClientService {
     private endpoint = process.env.RICK_AND_MORTY_API + 'episode'
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(EpisodeClientService.name);

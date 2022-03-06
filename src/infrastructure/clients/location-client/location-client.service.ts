@@ -2,13 +2,12 @@ import {Injectable} from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
 import {Pagination} from "../../dto/pagination";
 import {Location} from "../../../domain/models/location";
-import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
 import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'
 
 @Injectable()
-export class LocationClientService implements ILocationRepository {
+export class LocationClientService {
     private endpoint = process.env.RICK_AND_MORTY_API + 'location'
 
     private readonly logger: LoggerCustomService = new LoggerCustomService(LocationClientService.name);

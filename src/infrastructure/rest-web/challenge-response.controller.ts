@@ -6,7 +6,7 @@ import {
 import {
     EpisodeLocationsExerciseUseCaseService
 } from "../../application/use-cases/episode-locations-exercise-use-case/episode-locations-exercise-use-case.service";
-import {DataInMemoryService} from "../data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../services/data-in-memory/data-in-memory.service";
 import {LOGGER, LoggerCustomService} from "../logger-custom.service";
 
 const nameMethod = 'handler'

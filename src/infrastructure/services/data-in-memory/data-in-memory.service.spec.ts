@@ -1,6 +1,6 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {DataInMemoryService} from './data-in-memory.service';
-import {ClientsModule} from "../clients/clients.module";
+import {ClientsModule} from "../../clients/clients.module";
 import {
     newCharacterPage1,
     newCharacterPage2,
@@ -8,10 +8,10 @@ import {
     newEpisodePage2,
     newLocationPage1,
     newLocationPage2
-} from "../../../test/json-to-test";
-import {LocationClientService} from "../clients/location-client/location-client.service";
-import {CharacterClientService} from "../clients/character-client/character-client.service";
-import {EpisodeClientService} from "../clients/episode-client/episode-client.service";
+} from "../../../../test/json-to-test";
+import {LocationClientService} from "../../clients/location-client/location-client.service";
+import {CharacterClientService} from "../../clients/character-client/character-client.service";
+import {EpisodeClientService} from "../../clients/episode-client/episode-client.service";
 
 describe('DataInMemoryService', () => {
     let service: DataInMemoryService;
