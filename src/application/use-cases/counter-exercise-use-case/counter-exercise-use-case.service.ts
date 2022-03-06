@@ -58,6 +58,19 @@ export class CounterExerciseUseCaseService {
         } as ExerciseResult<CountResult>;
     }
 
+    private countOccurrencesLetterInNamesOfNameable(letter: string, nameable: INameable[], resource: string): CountResult {
+        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
+
+        const count = this.countResultProcess(letter, nameable);
+        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
+
+        return {
+            char: letter,
+            count: count,
+            resource: resource,
+        } as CountResult;
+    }
+
     private countResultProcess(letter: string, contTheLetters: INameable[]): number {
         this.logger.info(COUNT_RESULT_PROCES, ``, LOGGER.INIT);
 
@@ -72,19 +85,6 @@ export class CounterExerciseUseCaseService {
 
         this.logger.info(COUNT_RESULT_PROCES, `count: ${count}`, LOGGER.END);
         return count;
-    }
-
-    private countOccurrencesLetterInNamesOfNameable(letter: string, nameable: INameable[], resource: string): CountResult {
-        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, ``, LOGGER.INIT);
-
-        const count = this.countResultProcess(letter, nameable);
-        this.logger.info(COUNT_OCCURRENCES_LETTER_IN_NAMES_NAMEABLE, `count: ${count}`, LOGGER.END);
-
-        return {
-            char: letter,
-            count: count,
-            resource: resource,
-        } as CountResult;
     }
 
 }
