@@ -4,6 +4,9 @@ import {UseCasesModule} from "../../application/use-cases/use-cases.module";
 import {AppModule} from "../../app.module";
 import {HttpModule, HttpService} from "nestjs-http-promise";
 import {INestApplication} from "@nestjs/common";
+import {LocationClientService} from "../clients/location-client/location-client.service";
+import {CharacterClientService} from "../clients/character-client/character-client.service";
+import {EpisodeClientService} from "../clients/episode-client/episode-client.service";
 import {
     newCharacterPage1,
     newCharacterPage2,
@@ -13,9 +16,6 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../test/json-to-test";
-import {IEpisodeRepository} from "../../domain/adapters/IEpisodeRepository";
-import {ILocationRepository} from "../../domain/adapters/ILocationRepository";
-import {ICharacterRepository} from "../../domain/adapters/ICharacterRepository";
 
 const request = require('supertest');
 
@@ -25,9 +25,9 @@ describe('ChallengeResponseController', () => {
     let app: INestApplication;
     let httpService: HttpService;
 
-    let episodeClientService: IEpisodeRepository
-    let locationClientService: ILocationRepository
-    let characterClientService: ICharacterRepository
+    let episodeClientService: EpisodeClientService
+    let locationClientService: LocationClientService
+    let characterClientService: CharacterClientService
 
     beforeAll(async () => {
         const testAppModule: TestingModule = await Test.createTestingModule({
@@ -38,33 +38,33 @@ describe('ChallengeResponseController', () => {
         httpService = testAppModule.get<HttpService>(HttpService);
 
 
-        episodeClientService = app.get<IEpisodeRepository>(IEpisodeRepository);
-        locationClientService = app.get<ILocationRepository>(ILocationRepository);
-        characterClientService = app.get<ICharacterRepository>(ICharacterRepository);
+        episodeClientService = app.get<EpisodeClientService>(EpisodeClientService);
+        locationClientService = app.get<LocationClientService>(LocationClientService);
+        characterClientService = app.get<CharacterClientService>(CharacterClientService);
 
         await app.init();
     });
 
     it('should be return an ExerciseResult', async () => {
-        jest.spyOn(locationClientService, 'findAll').mockImplementation((page?: number) => {
+        jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return newLocationPage1().results;
+                return Promise.resolve(newLocationPage1())
             }
-            return newLocationPage2().results;
+            return Promise.resolve(newLocationPage2())
         });
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return newCharacterPage1().results;
+                return Promise.resolve(newCharacterPage1())
             }
-            return newCharacterPage2().results;
+            return Promise.resolve(newCharacterPage2())
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return newEpisodePage1().results;
+                return Promise.resolve(newEpisodePage1());
             }
-            return newEpisodePage2().results;
+            return Promise.resolve(newEpisodePage2());
         });
 
         const response = await request(app.getHttpServer()).get("")
@@ -78,22 +78,22 @@ describe('ChallengeResponseController', () => {
 
     it('should be return an 500 error', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
-            throw new Error('400 error');
-            return newLocationPage2().results;
+            throw new Error('400 error')
+            return Promise.resolve(newLocationPage2())
         });
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return newCharacterPage1().results;
+                return Promise.resolve(newCharacterPage1())
             }
-            return newCharacterPage2().results;
+            return Promise.resolve(newCharacterPage2())
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return newEpisodePage1().results;
+                return Promise.resolve(newEpisodePage1());
             }
-            return newEpisodePage2().results;
+            return Promise.resolve(newEpisodePage2());
         });
 
         const response = await request(app.getHttpServer()).get("");
