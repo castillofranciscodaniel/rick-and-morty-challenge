@@ -52,7 +52,6 @@ describe('CounterExerciseUseCaseService', () => {
             return [...newEpisodePage1().results, ...newEpisodePage2().results]
         });
 
-
         const response = service.handler(new Date());
 
         expect(response).toMatchObject({exercise_name: 'Char counter', in_time: true})
