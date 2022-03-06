@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {HttpService} from "nestjs-http-promise";
 import {Pagination} from "../../dto/pagination";
 import {Episode} from "../../../domain/models/episode";
-import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {IEpisodeRepository} from "../../../domain/ports/IEpisodeRepository";
 import {LOGGER, LoggerCustomService} from "../../logger-custom.service";
 
 const nameMethod = 'findAll'

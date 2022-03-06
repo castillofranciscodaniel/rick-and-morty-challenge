@@ -2,9 +2,9 @@ import {Inject, Injectable} from '@nestjs/common';
 import {CountResult, ExerciseResult} from "../../dto/count-result";
 import {INameable} from "../../../domain/models/INameable";
 import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
-import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
-import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
-import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {ICharacterRepository} from "../../../domain/ports/ICharacterRepository";
+import {ILocationRepository} from "../../../domain/ports/ILocationRepository";
+import {IEpisodeRepository} from "../../../domain/ports/IEpisodeRepository";
 
 const EXERCISE_NAME = 'Char counter'
 const NAME_METHOD = 'handler'

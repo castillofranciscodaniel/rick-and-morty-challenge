@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
-import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
+import {ILocationRepository} from "../../../domain/ports/ILocationRepository";
 
 @Injectable()
 export class LocationRepositoryService implements ILocationRepository {

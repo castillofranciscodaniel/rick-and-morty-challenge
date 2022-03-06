@@ -1,8 +1,8 @@
 import {Inject, Injectable} from '@nestjs/common';
 import {EpisodeLocationResult, ExerciseResult} from "../../dto/count-result";
 import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
-import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
-import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {ICharacterRepository} from "../../../domain/ports/ICharacterRepository";
+import {IEpisodeRepository} from "../../../domain/ports/IEpisodeRepository";
 
 const NAME_METHOD = 'handler'
 

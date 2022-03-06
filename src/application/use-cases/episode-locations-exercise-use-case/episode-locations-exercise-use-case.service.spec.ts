@@ -7,9 +7,9 @@ import {
     newEpisodePage1,
     newEpisodePage2
 } from "../../../../test/json-to-test";
-import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
+import {ICharacterRepository} from "../../../domain/ports/ICharacterRepository";
 import {AdaptersModule} from "../../../infrastructure/adapters/adapters.module";
-import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {IEpisodeRepository} from "../../../domain/ports/IEpisodeRepository";
 
 describe('EpisodeLocationsExerciseUseCaseService', () => {
     let service: EpisodeLocationsExerciseUseCaseService;

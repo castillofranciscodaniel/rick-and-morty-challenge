@@ -15,9 +15,9 @@ import {
 } from "../../../../test/json-to-test";
 import {DataInMemoryModule} from "../../../infrastructure/services/data-in-memory/data-in-memory.module";
 import {AdaptersModule} from "../../../infrastructure/adapters/adapters.module";
-import {ICharacterRepository} from "../../../domain/adapters/ICharacterRepository";
-import {ILocationRepository} from "../../../domain/adapters/ILocationRepository";
-import {IEpisodeRepository} from "../../../domain/adapters/IEpisodeRepository";
+import {ICharacterRepository} from "../../../domain/ports/ICharacterRepository";
+import {ILocationRepository} from "../../../domain/ports/ILocationRepository";
+import {IEpisodeRepository} from "../../../domain/ports/IEpisodeRepository";
 
 describe('CounterExerciseUseCaseService', () => {
     let service: CounterExerciseUseCaseService;
