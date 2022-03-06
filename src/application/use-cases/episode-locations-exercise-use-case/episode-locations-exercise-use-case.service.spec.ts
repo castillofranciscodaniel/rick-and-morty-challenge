@@ -13,8 +13,8 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../../test/json-to-test";
-import {DataInMemoryModule} from "../../../infrastructure/data-in-memory/data-in-memory.module";
-import {DataInMemoryService} from "../../../infrastructure/data-in-memory/data-in-memory.service";
+import {DataInMemoryModule} from "../../../infrastructure/services/data-in-memory/data-in-memory.module";
+import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
 
 describe('EpisodeLocationsExerciseUseCaseService', () => {
     let service: EpisodeLocationsExerciseUseCaseService;

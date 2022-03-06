@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import {CountResult, ExerciseResult} from "../../dto/count-result";
 import {INameable} from "../../../domain/models/INameable";
 import {LOGGER, LoggerCustomService} from "../../../infrastructure/logger-custom.service";
@@ -25,9 +25,9 @@ export class CounterExerciseUseCaseService {
 
 
     constructor(
-        private readonly characterRepository: ICharacterRepository,
-        private readonly locationRepository: ILocationRepository,
-        private readonly episodeRepository: IEpisodeRepository
+        @Inject(ICharacterRepository) private readonly characterRepository: ICharacterRepository,
+        @Inject(ILocationRepository) private readonly locationRepository: ILocationRepository,
+        @Inject(IEpisodeRepository) private readonly episodeRepository: IEpisodeRepository
     ) {
     }
 

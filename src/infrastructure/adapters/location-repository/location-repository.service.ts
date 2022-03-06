@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {LocationRepository} from "../../../../dist/domain/adapters/locationRepository";
-import {DataInMemoryService} from "../../data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
 
 @Injectable()
 export class LocationRepositoryService implements LocationRepository {
@@ -9,7 +9,7 @@ export class LocationRepositoryService implements LocationRepository {
     }
 
     findAll(page?: number): any {
-        return this.data.characters;
+        return this.data.locations;
     }
 
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {EpisodeRepository} from "../../../../dist/domain/adapters/episodeRepository";
-import {DataInMemoryService} from "../../data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
 
 @Injectable()
 export class EpisodeRepositoryService implements EpisodeRepository {
@@ -9,7 +9,7 @@ export class EpisodeRepositoryService implements EpisodeRepository {
     }
 
     findAll(page?: number): any {
-        return this.data.characters;
+        return this.data.episodes;
     }
 
 }

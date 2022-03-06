@@ -1,23 +1,18 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {ChallengeResponseController} from './challenge-response.controller';
-import {CountResult, ExerciseResult} from "../../application/dto/count-result";
 import {UseCasesModule} from "../../application/use-cases/use-cases.module";
 import {AppModule} from "../../app.module";
 import {HttpModule, HttpService} from "nestjs-http-promise";
 import {INestApplication} from "@nestjs/common";
-import {LocationClientService} from "../clients/location-client/location-client.service";
-import {CharacterClientService} from "../clients/character-client/character-client.service";
-import {EpisodeClientService} from "../clients/episode-client/episode-client.service";
 import {
     newCharacterPage1,
     newCharacterPage2,
-    newEpisodePage1, newEpisodePage2, newExerciseCResultCharCounter,
+    newEpisodePage1,
+    newEpisodePage2,
+    newExerciseCResultCharCounter,
     newLocationPage1,
     newLocationPage2
 } from "../../../test/json-to-test";
-import {LocationRepository} from "../../../dist/domain/adapters/locationRepository";
-import {CharacterRepository} from "../../../dist/domain/adapters/characterRepository";
-import {EpisodeRepository} from "../../../dist/domain/adapters/episodeRepository";
 import {IEpisodeRepository} from "../../domain/adapters/IEpisodeRepository";
 import {ILocationRepository} from "../../domain/adapters/ILocationRepository";
 import {ICharacterRepository} from "../../domain/adapters/ICharacterRepository";
@@ -51,25 +46,25 @@ describe('ChallengeResponseController', () => {
     });
 
     it('should be return an ExerciseResult', async () => {
-        jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
+        jest.spyOn(locationClientService, 'findAll').mockImplementation((page?: number) => {
             if (page === 1) {
-                return Promise.resolve(newLocationPage1())
+                return newLocationPage1().results;
             }
-            return Promise.resolve(newLocationPage2())
+            return newLocationPage2().results;
         });
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newCharacterPage1())
+                return newCharacterPage1().results;
             }
-            return Promise.resolve(newCharacterPage2())
+            return newCharacterPage2().results;
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newEpisodePage1());
+                return newEpisodePage1().results;
             }
-            return Promise.resolve(newEpisodePage2());
+            return newEpisodePage2().results;
         });
 
         const response = await request(app.getHttpServer()).get("")
@@ -83,22 +78,22 @@ describe('ChallengeResponseController', () => {
 
     it('should be return an 500 error', async () => {
         jest.spyOn(locationClientService, 'findAll').mockImplementation((page: number) => {
-            throw new Error('400 error')
-            return Promise.resolve(newLocationPage2())
+            throw new Error('400 error');
+            return newLocationPage2().results;
         });
 
         jest.spyOn(characterClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newCharacterPage1())
+                return newCharacterPage1().results;
             }
-            return Promise.resolve(newCharacterPage2())
+            return newCharacterPage2().results;
         });
 
         jest.spyOn(episodeClientService, 'findAll').mockImplementation((page: number) => {
             if (page === 1) {
-                return Promise.resolve(newEpisodePage1());
+                return newEpisodePage1().results;
             }
-            return Promise.resolve(newEpisodePage2());
+            return newEpisodePage2().results;
         });
 
         const response = await request(app.getHttpServer()).get("");

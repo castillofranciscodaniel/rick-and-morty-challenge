@@ -5,8 +5,10 @@ import {ILocationRepository} from "../../domain/adapters/ILocationRepository";
 import {IEpisodeRepository} from "../../domain/adapters/IEpisodeRepository";
 import {LocationRepositoryService} from "./location-repository/location-repository.service";
 import {EpisodeRepositoryService} from "./episode-repository/episode-repository.service";
+import {DataInMemoryModule} from "../services/data-in-memory/data-in-memory.module";
 
 @Module({
+    imports: [DataInMemoryModule],
     providers: [
         {
             provide: ICharacterRepository,

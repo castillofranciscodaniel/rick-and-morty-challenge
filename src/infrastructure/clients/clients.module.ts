@@ -17,7 +17,8 @@ import {HttpModule} from "nestjs-http-promise";
     providers: [
         CharacterClientService,
         LocationClientService,
-        EpisodeClientService],
+        EpisodeClientService
+    ],
     exports: [CharacterClientService, LocationClientService, EpisodeClientService]
 })
 export class ClientsModule {

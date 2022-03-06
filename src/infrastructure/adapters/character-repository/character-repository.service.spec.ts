@@ -1,21 +1,21 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CharacterRepositoryService } from './character-repository.service';
-import {CharacterClientService} from "../../clients/character-client/character-client.service";
+import {Test, TestingModule} from '@nestjs/testing';
+import {CharacterRepositoryService} from './character-repository.service';
+import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
 
 describe('CharacterRepositoryService', () => {
-  let service: CharacterRepositoryService;
-  let characterClientService: CharacterClientService;
+    let service: CharacterRepositoryService;
+    let dataInMemoryService: DataInMemoryService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [CharacterRepositoryService],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            providers: [CharacterRepositoryService],
+        }).compile();
 
-    characterClientService = module.get<CharacterClientService>(CharacterClientService);
-    service = module.get<CharacterRepositoryService>(CharacterRepositoryService);
-  });
+        dataInMemoryService = module.get<DataInMemoryService>(DataInMemoryService);
+        service = module.get<CharacterRepositoryService>(CharacterRepositoryService);
+    });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(service).toBeDefined();
+    });
 });
