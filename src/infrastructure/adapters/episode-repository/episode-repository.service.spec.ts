@@ -1,8 +1,8 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {EpisodeRepositoryService} from './episode-repository.service';
-import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../../data-in-memory/data-in-memory.service";
 import {AdaptersModule} from "../adapters.module";
-import {DataInMemoryModule} from "../../services/data-in-memory/data-in-memory.module";
+import {DataInMemoryModule} from "../../data-in-memory/data-in-memory.module";
 import {newEpisodePage1, newEpisodePage2} from "../../../../test/json-to-test";
 
 describe('EpisodeRepositoryService', () => {

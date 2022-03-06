@@ -3,7 +3,7 @@ import {CounterExerciseUseCaseService} from './counter-exercise-use-case.service
 import {CharacterClientService} from "../../../infrastructure/clients/character-client/character-client.service";
 import {LocationClientService} from "../../../infrastructure/clients/location-client/location-client.service";
 import {EpisodeClientService} from "../../../infrastructure/clients/episode-client/episode-client.service";
-import {DataInMemoryService} from "../../../infrastructure/services/data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../../../infrastructure/data-in-memory/data-in-memory.service";
 import {
     newCharacterPage1,
     newCharacterPage2,
@@ -13,7 +13,7 @@ import {
     newLocationPage1,
     newLocationPage2
 } from "../../../../test/json-to-test";
-import {DataInMemoryModule} from "../../../infrastructure/services/data-in-memory/data-in-memory.module";
+import {DataInMemoryModule} from "../../../infrastructure/data-in-memory/data-in-memory.module";
 import {AdaptersModule} from "../../../infrastructure/adapters/adapters.module";
 import {ICharacterRepository} from "../../../domain/ports/ICharacterRepository";
 import {ILocationRepository} from "../../../domain/ports/ILocationRepository";

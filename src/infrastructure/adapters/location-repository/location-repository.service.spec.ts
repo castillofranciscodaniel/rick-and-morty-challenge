@@ -1,7 +1,7 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {LocationRepositoryService} from './location-repository.service';
-import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
-import {DataInMemoryModule} from "../../services/data-in-memory/data-in-memory.module";
+import {DataInMemoryService} from "../../data-in-memory/data-in-memory.service";
+import {DataInMemoryModule} from "../../data-in-memory/data-in-memory.module";
 import {AdaptersModule} from "../adapters.module";
 import {newLocationPage1, newLocationPage2} from "../../../../test/json-to-test";
 

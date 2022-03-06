@@ -5,7 +5,7 @@ import {ILocationRepository} from "../../domain/ports/ILocationRepository";
 import {IEpisodeRepository} from "../../domain/ports/IEpisodeRepository";
 import {LocationRepositoryService} from "./location-repository/location-repository.service";
 import {EpisodeRepositoryService} from "./episode-repository/episode-repository.service";
-import {DataInMemoryModule} from "../services/data-in-memory/data-in-memory.module";
+import {DataInMemoryModule} from "../data-in-memory/data-in-memory.module";
 
 @Module({
     imports: [DataInMemoryModule],

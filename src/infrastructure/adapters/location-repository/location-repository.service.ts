@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {DataInMemoryService} from "../../services/data-in-memory/data-in-memory.service";
+import {DataInMemoryService} from "../../data-in-memory/data-in-memory.service";
 import {ILocationRepository} from "../../../domain/ports/ILocationRepository";
 
 @Injectable()

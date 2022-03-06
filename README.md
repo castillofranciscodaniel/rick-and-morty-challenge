@@ -28,6 +28,7 @@ curl --location --request GET 'http://localhost:3000'
 ## Architecture Hexagonal
 
 domain --> models
+       --> ports
 
 application --> dto
 
