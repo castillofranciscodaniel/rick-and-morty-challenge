@@ -28,16 +28,20 @@ curl --location --request GET 'http://localhost:3000'
 ## Architecture Hexagonal
 
 domain --> models
-       --> ports
+domain --> ports
 
 application --> dto
-
 application --> use-cases
 
 infrastructure --> clients
-
 infrastructure --> dto
-
 infrastructure --> rest-web
+infrastructure --> data-in-memory
 
-infrastructure --> services
+La idea de como esta maquetado el proyecto, es que la capa aplicación solo dependa
+del domain y las interfaces que el mismo provee con sus puertos.
+
+La infraestructura es la encargada de implementar esos ports en sus adaptadores.
+
+De este modo, aplicación no conoce nada de como infraestructura ha implementado
+estos puertos.
