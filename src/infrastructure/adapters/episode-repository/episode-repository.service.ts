@@ -1,5 +1,4 @@
 import {Injectable} from '@nestjs/common';
-import {EpisodeRepository} from "../../../../dist/domain/adapters/episodeRepository";
 import {DataInMemoryService} from "../../data-in-memory/data-in-memory.service";
 import {IEpisodeRepository} from "../../../domain/ports/IEpisodeRepository";
 
