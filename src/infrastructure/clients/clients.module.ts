@@ -3,6 +3,7 @@ import {CharacterClientService} from './character-client/character-client.servic
 import {LocationClientService} from './location-client/location-client.service';
 import {EpisodeClientService} from './episode-client/episode-client.service';
 import {HttpModule} from "nestjs-http-promise";
+import { CurrencyService } from './currency/currency.service';
 
 @Module({
     imports: [
@@ -17,9 +18,10 @@ import {HttpModule} from "nestjs-http-promise";
     providers: [
         CharacterClientService,
         LocationClientService,
-        EpisodeClientService
+        EpisodeClientService,
+        CurrencyService
     ],
-    exports: [CharacterClientService, LocationClientService, EpisodeClientService]
+    exports: [CharacterClientService, LocationClientService, EpisodeClientService, CurrencyService]
 })
 export class ClientsModule {
 }

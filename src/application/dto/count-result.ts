@@ -14,6 +14,16 @@ export interface ExerciseResult<T> {
     exercise_name: string,
     time?: string,
     in_time: boolean,
-    results: T[]
+    results: T[],
+}
+
+export interface  ExerciseResultCountValue<T> extends ExerciseResult<T> {
+    total: number
+}
+
+
+export interface CalculateValue {
+    name: string,
+    value?: number
 }
 

@@ -48,7 +48,7 @@ export class EpisodeLocationsExerciseUseCaseService {
 
                 return episodeLocation;
             }
-        )
+        ).filter(value => value.name == 'santi')
 
         const endTime = new Date().getTime();
         const totalTimeMilliseconds = (endTime - startTime.getTime());
